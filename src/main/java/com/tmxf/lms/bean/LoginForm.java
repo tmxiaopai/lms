@@ -1,20 +1,21 @@
-package com.tmxf.lms.domain;
+package com.tmxf.lms.bean;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author TMXIAOPAI
- * @date 2020/3/19 - 16:44
- * @package_name com.tmxf.domain
+ * @date 2020/4/2 - 22:01
+ * @package_name com.tmxf.lms.bean
  */
 @Getter
 @Setter
-public class User {
-    private int id;
-    private String username;
+public class LoginForm {
+    private Integer userNum;
     private String password;
+    private String captcha;
 
     @Override
     public String toString() {

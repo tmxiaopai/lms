@@ -1,28 +1,36 @@
 package com.tmxf.lms.service;
 
-import com.tmxf.lms.domain.User;
-import com.tmxf.lms.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.tmxf.lms.entity.User;
+
+import java.util.List;
 
 /**
  * @author TMXIAOPAI
- * @date 2020/3/19 - 17:04
- * @package_name com.tmxf.Service
+ * @date 2020/3/31 - 23:11
+ * @package_name com.tmxf.lms.service
  */
-@Service
-public class UserService {
-    @Autowired
-    private UserMapper userMapper;
+public interface UserService {
+    /**
+     * 查询所有用户信息
+     *
+     * @return
+     */
+    List<User> findAll();
 
-    public User findByName(String username) {
-        System.out.println("service层中出现的用户名"+username);
-        User u=userMapper.findByName(username);
-        return u;
-    }
+    /**
+     * 根据用户编号查询用户信息
+     *
+     * @param userNum
+     * @return
+     */
+    User findUserLoginInfoByUserNum(Integer userNum);
 
-    public User findById(int id) {
-        User u=userMapper.findById(id);
-        return u;
-    }
+    /**
+     * 插入用户信息
+     *
+     * @param user
+     */
+    void insertUser(User user);
+
+
 }

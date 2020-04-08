@@ -1,16 +1,24 @@
 package com.tmxf.lms.shiro;
 
-
-import com.tmxf.lms.domain.User;
+import com.tmxf.lms.entity.User;
 import com.tmxf.lms.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
+import java.util.Enumeration;
 
 /**
  * @author TMXIAOPAI
@@ -18,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @package_name com.tmxf.shiro
  */
 public class UserRealm extends AuthorizingRealm {
+    Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private UserService userService;
 
@@ -27,7 +36,7 @@ public class UserRealm extends AuthorizingRealm {
 
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
-        User user1 = userService.findById(user.getId());
+        User user1 = userService.findUserLoginInfoByUserNum(user.getUserNum());
         simpleAuthorizationInfo.addStringPermission("");
         simpleAuthorizationInfo.addStringPermission("user:add");
         return simpleAuthorizationInfo;
@@ -37,17 +46,12 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         // AuthenticationInfo authenticationInfo=new AuthenticationInfo();
         UsernamePasswordToken token1 = (UsernamePasswordToken) token;
-        System.out.println("Realm中token中的数据");
-        System.out.println(token1.getUsername());
-        System.out.println(token1.getPassword());
-        User user = userService.findByName(token1.getUsername());
-        System.out.println("Realm中service查询的数据" + user);
+        User user = userService.findUserLoginInfoByUserNum(Integer.parseInt(token1.getUsername()));
         if (user == null) {
-            System.out.println("user为空");
+            logger.info("UserRealm中查询用户为空");
             throw new UnknownAccountException();
         }
-        System.out.println("user不为空");
-        System.out.println(user.toString());
-        return new SimpleAuthenticationInfo("user", user.getPassword(), "");
+        logger.info("UserRealm中的用户信息为：" + user.toString());
+        return new SimpleAuthenticationInfo("user", user.getUserPassword(), "");
     }
 }

@@ -57,6 +57,14 @@ public class Project implements Serializable {
      * 项目登记时间
      */
     private Date projectDesignDate;
+    /**
+     * 项目删除状态
+     */
+    private boolean projectStatus;
+
+    /**
+     * @return 项目字符串信息
+     */
 
     @Override
     public String toString() {
