@@ -3,10 +3,7 @@ package com.tmxf.lms.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.tmxf.lms.entity.Customer;
 import com.tmxf.lms.entity.Permission;
-import com.tmxf.lms.service.CustomerService;
-import com.tmxf.lms.service.NoticeService;
-import com.tmxf.lms.service.PermissionService;
-import com.tmxf.lms.service.UserService;
+import com.tmxf.lms.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -30,26 +27,36 @@ public class SearchListController {
     private UserService userService;
     @Resource
     private NoticeService noticeService;
+    @Resource
+    private AboutRoleService aboutRoleService;
 
     @RequestMapping(value = "/findAllUser", method = RequestMethod.GET)
-    public String login() {
-
-        logger.info("查找所有用户信息：" + JSONObject.toJSONString(userService.findAll()));
+    public String findAllUser() {
+        logger.info("----------查找所有用户信息----------");
         return JSONObject.toJSONString(userService.findAll());
     }
 
     @RequestMapping(value = "/findNavTree", method = RequestMethod.GET)
     public List<Permission> findNavTree(@RequestParam Integer userNum) {
+        logger.info("----------查找菜单树----------");
         return permissionService.findNavTree(userNum, 1);
     }
 
     @GetMapping("findAllCustomer")
     public Object findAllCustomer() {
+        logger.info("----------查找所有客户信息----------");
         return customerService.FindAllCustomer();
     }
 
     @GetMapping("findAllNotice")
     public Object findAllNotice() {
+        logger.info("----------查找所有公告信息----------");
         return noticeService.findAllNotice();
+    }
+
+    @GetMapping("findAllRole")
+    public Object findAllRole() {
+        logger.info("----------查找所有角色信息----------");
+        return aboutRoleService.findAllRole();
     }
 }

@@ -30,7 +30,24 @@ public interface UserService {
      *
      * @param user
      */
-    void insertUser(User user);
+    int insertUser(User user);
 
+    /**
+     * 根据工号查找用户ID
+     *
+     * @param userNum
+     * @return
+     */
+    int findUserIdByUserNum(Integer userNum);
+
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     * @return
+     */
+    int updateUserBuPrimaryKey(User user);
+
+    int deleteUser(Integer userId);
 
 }

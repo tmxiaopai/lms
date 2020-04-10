@@ -49,19 +49,19 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    private Timestamp userCreateTime;
+    private Date userCreateTime;
     /**
      * 上次登录时间
      */
-    private Timestamp userLastLoginTime;
+    private Date userLastLoginTime;
     /**
      * 最后更新时间
      */
-    private Timestamp userUpdateTime;
+    private Date userUpdateTime;
     /**
      * 用户状态
      */
-    private Object userStatus;
+    private Boolean userStatus;
 
 
     @Override

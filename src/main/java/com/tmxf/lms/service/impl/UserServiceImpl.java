@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return userMapper.findNote();
+        return userMapper.selectAll();
     }
 
     @Override
@@ -30,7 +30,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void insertUser(User user) {
-        userMapper.insertUser(user);
+    public int insertUser(User user) {
+        return userMapper.insertUser(user);
+    }
+
+    @Override
+    public int findUserIdByUserNum(Integer userNum) {
+        return userMapper.findUserIdByUserNum(userNum);
+    }
+
+    @Override
+    public int updateUserBuPrimaryKey(User user) {
+        return userMapper.updateUserBuPrimaryKey(user);
+    }
+
+    @Override
+    public int deleteUser(Integer userId) {
+        return userMapper.deleteUser(userId);
     }
 }

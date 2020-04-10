@@ -46,17 +46,13 @@ public interface RoleMapper {
 
     @Select({
             "select",
-            "role_id, role_num, role_name, role_desc, role_status, role_create_time, role_update_time",
+            "role_id, role_num, role_name",
             "from role"
     })
     @Results({
             @Result(column = "role_id", property = "roleId", jdbcType = JdbcType.INTEGER, id = true),
             @Result(column = "role_num", property = "roleNum", jdbcType = JdbcType.INTEGER),
             @Result(column = "role_name", property = "roleName", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "role_desc", property = "roleDesc", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "role_status", property = "roleStatus", jdbcType = JdbcType.BIT),
-            @Result(column = "role_create_time", property = "roleCreateTime", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "role_update_time", property = "roleUpdateTime", jdbcType = JdbcType.TIMESTAMP)
     })
     List<Role> selectAll();
 

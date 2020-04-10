@@ -26,4 +26,12 @@ public interface NoticeService {
      * @return
      */
     int insertNotice(Notice notice);
+
+    /**
+     * 通过公告ID删除公告
+     *
+     * @param noticeId
+     * @return
+     */
+    int deleteByNoticeID(Integer noticeId);
 }

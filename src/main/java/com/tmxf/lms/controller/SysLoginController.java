@@ -43,6 +43,7 @@ public class SysLoginController {
 
     @GetMapping("captcha.jpg")
     public void captcha(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        logger.info("----------获取验证码----------");
         response.setHeader("Cache-Control", "np-store,no-cache");
         response.setContentType("image/jpeg");
         String text = producer.createText();
@@ -56,29 +57,37 @@ public class SysLoginController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public Object doLogin(@RequestBody LoginForm loginForm, HttpServletRequest request) {
+        logger.info("----------登录逻辑----------");
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(String.valueOf(loginForm.getUserNum()), loginForm.getPassword());
         logger.info("登录信息为:" + loginForm.toString());
         String captchaConfirm = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         Map<String, Object> map = new HashMap<>();
         if (captchaConfirm == null) {
-            return map.put("msg", "验证码无效");
+            map.put("msg", "验证码无效");
+            return map;
         }
         if (!loginForm.getCaptcha().equals(captchaConfirm)) {
-            return map.put("msg", "验证码输入错误");
+            map.put("msg", "验证码输入错误");
+            return map;
         }
         try {
             subject.login(token);
         } catch (UnknownAccountException e) {
-            return map.put("msg", "该用户不存在");
+            map.put("msg", "该用户不存在");
+            return map;
         } catch (IncorrectCredentialsException e) {
-            return map.put("msg", "密码不正确");
+            map.put("msg", "密码不正确");
+            return map;
         } catch (AuthenticationException e) {
-            return map.put("msg", "出现错误");
+            map.put("msg", "出现错误");
+            return map;
         }
         User user = userService.findUserLoginInfoByUserNum(loginForm.getUserNum());
+        request.getSession().setAttribute("userName", user.getUserName());
         map.put("user", user);
         map.put("token", token);
+        map.put("msg", "登录成功");
         return map;
     }
 }

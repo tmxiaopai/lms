@@ -1,6 +1,7 @@
 package com.tmxf.lms.mapper;
 
 import com.tmxf.lms.entity.Notice;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,10 +25,27 @@ public interface NoticeMapper {
     })
     List<Notice> findAllNotice();
 
+    /**
+     * 插入记录
+     *
+     * @param notice
+     * @return
+     */
     @Insert({
             "insert into notice (notice_name,notice_content,notice_date,notice_man)",
-            " values(#{noticeName,jdbcType=VARCHAR},#{noticeContent,jdbcType=VARCHAR}",
-            "#{noticeDate,jdbcType=DATETIME},#{notice_man,jdbcType=VARCHAR})"
+            " values(#{noticeName,jdbcType=VARCHAR},#{noticeContent,jdbcType=VARCHAR},",
+            "#{noticeDate,jdbcType=TIMESTAMP},#{noticeMan,jdbcType=VARCHAR})"
     })
     int insertNotice(Notice notice);
+
+    /**
+     * 通过公告ID删除公告
+     *
+     * @param noticeId
+     * @return
+     */
+    @Delete({
+            "delete from notice where notice_id = #{noticeId}"
+    })
+    int deleteByNoticeId(Integer noticeId);
 }

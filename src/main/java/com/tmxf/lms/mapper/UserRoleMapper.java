@@ -9,12 +9,20 @@ import org.apache.ibatis.type.JdbcType;
 
 @Mapper
 public interface UserRoleMapper {
+    /**
+     * @param userRoleId
+     * @return
+     */
     @Delete({
             "delete from user_role",
             "where user_role_id = #{userRoleId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer userRoleId);
 
+    /**
+     * @param record
+     * @return
+     */
     @Insert({
             "insert into user_role (user_role_id, user_id, ",
             "role_id)",
@@ -23,6 +31,10 @@ public interface UserRoleMapper {
     })
     int insert(UserRole record);
 
+    /**
+     * @param userRoleId
+     * @return
+     */
     @Select({
             "select",
             "user_role_id, user_id, role_id",
@@ -36,6 +48,9 @@ public interface UserRoleMapper {
     })
     UserRole selectByPrimaryKey(Integer userRoleId);
 
+    /**
+     * @return
+     */
     @Select({
             "select",
             "user_role_id, user_id, role_id",
@@ -48,6 +63,10 @@ public interface UserRoleMapper {
     })
     List<UserRole> selectAll();
 
+    /**
+     * @param record
+     * @return
+     */
     @Update({
             "update user_role",
             "set user_id = #{userId,jdbcType=INTEGER},",
@@ -55,4 +74,20 @@ public interface UserRoleMapper {
             "where user_role_id = #{userRoleId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(UserRole record);
+
+    /**
+     * @param userRole
+     * @return
+     */
+    @Update({
+            "update user_role",
+            "set role_id = #{roleId,jdbcType=INTEGER}",
+            "where user_id = #{userId,jdbcType=INTEGER}"
+    })
+    int updateByUserId(UserRole userRole);
+
+    @Delete({
+            "delete from user_role where user_id = #{userId}"
+    })
+    int deleteUserRole(Integer userId);
 }

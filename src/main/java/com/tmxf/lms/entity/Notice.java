@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -33,7 +34,8 @@ public class Notice {
     /**
      * 公告发布人
      */
-    private String nticeMan;
+    private String noticeMan;
+
 
     @Override
     public String toString() {
