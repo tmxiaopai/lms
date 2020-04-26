@@ -9,8 +9,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * The type Notice service.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/8 - 23:17
+ * @date 2020 /4/8 - 23:17
  * @package_name com.tmxf.lms.service.impl
  */
 @Service
@@ -21,6 +23,11 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public List<Notice> findAllNotice() {
         return noticeMapper.findAllNotice();
+    }
+
+    @Override
+    public List<Notice> findWNotice() {
+        return noticeMapper.findWNotice();
     }
 
     @Override

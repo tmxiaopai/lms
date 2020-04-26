@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The type User role form.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/10 - 15:02
+ * @date 2020 /4/10 - 15:02
  * @package_name com.tmxf.lms.bean
  */
 @Getter

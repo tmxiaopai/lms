@@ -1,88 +1,95 @@
 package com.tmxf.lms.mapper;
 
 import com.tmxf.lms.entity.Project;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.JdbcType;
-
 /**
- * @author TMXIAOPAI
+ * 项目(Project)表数据库访问层
+ *
+ * @author makejava
+ * @since 2020 -04-15 16:19:35
  */
-@Mapper
 public interface ProjectMapper {
+
     /**
-     * @param record
-     * @return
+     * 通过ID查询单条数据
+     *
+     * @param projectNum 主键
+     * @return 实例对象 project
      */
-    @Insert({
-            "insert into project (project_num, project_name, ",
-            "project_type, project_addr, ",
-            "customer_num, project_coop_in, ",
-            "project_need_count, project_desc, ",
-            "project_saleman, project_design_date)",
-            "values (#{projectNum,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, ",
-            "#{projectType,jdbcType=VARCHAR}, #{projectAddr,jdbcType=VARCHAR}, ",
-            "#{customerNum,jdbcType=INTEGER}, #{projectCoopIn,jdbcType=VARCHAR}, ",
-            "#{projectNeedCount,jdbcType=INTEGER}, #{projectDesc,jdbcType=VARCHAR}, ",
-            "#{projectSaleman,jdbcType=INTEGER}, #{projectDesignDate,jdbcType=TIMESTAMP})"
-    })
-    int insert(Project record);
+    Project queryById(String projectNum);
 
+    /**
+     * 查询指定行数据
+     *
+     * @param offset 查询起始位置
+     * @param limit  查询条数
+     * @return 对象列表 list
+     */
+    List<Project> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+
+
+    /**
+     * 通过实体作为筛选条件查询
+     *
+     * @return 对象列表 list
+     */
+    List<Project> queryAll();
+
+    /**
+     * 按需查找
+     *
+     * @param project the project
+     * @return list
+     */
+    List<Project> queryAllByProject(Project project);
+
+    /**
+     * 新增数据
+     *
+     * @param project 实例对象
+     * @return 影响行数 int
+     */
+    int insert(Project project);
+
+    /**
+     * 修改数据
+     *
+     * @param project 实例对象
+     * @return 影响行数 int
+     */
+    int update(Project project);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param projectNum 主键
+     * @return 影响行数 int
+     */
+    int deleteById(String projectNum);
+
+    /**
+     * Name ok string.
+     *
+     * @param projectName the project name
+     * @return the string
+     */
     @Select({
-            "select",
-            "project_num, project_name, project_type, project_addr, customer_num, project_coop_in, ",
-            "project_need_count, project_desc, project_saleman, project_design_date",
-            "from project",
-            "where project_num = #{projectNum,jdbcType=VARCHAR}"
+            "select project_name from project where project_name = #{projectName,jdbcType=VARCHAR}"
     })
-    @Results({
-            @Result(column = "project_num", property = "projectNum", jdbcType = JdbcType.VARCHAR, id = true),
-            @Result(column = "project_name", property = "projectName", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "project_type", property = "projectType", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "project_addr", property = "projectAddr", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "customer_num", property = "customerNum", jdbcType = JdbcType.INTEGER),
-            @Result(column = "project_coop_in", property = "projectCoopIn", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "project_need_count", property = "projectNeedCount", jdbcType = JdbcType.INTEGER),
-            @Result(column = "project_desc", property = "projectDesc", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "project_saleman", property = "projectSaleman", jdbcType = JdbcType.INTEGER),
-            @Result(column = "project_design_date", property = "projectDesignDate", jdbcType = JdbcType.TIMESTAMP)
-    })
-    Project selectByPrimaryKey(String projectNum);
+    String nameOk(String projectName);
 
+    /**
+     * 查找项目名
+     *
+     * @return list
+     */
     @Select({
-            "select",
-            "project_num, project_name, project_type, project_addr, customer_num, project_coop_in, ",
-            "project_need_count, project_desc, project_saleman, project_design_date",
-            "from project"
+            "select project_num,project_name from project order by project_name desc"
     })
-    @Results({
-            @Result(column = "project_num", property = "projectNum", jdbcType = JdbcType.VARCHAR, id = true),
-            @Result(column = "project_name", property = "projectName", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "project_type", property = "projectType", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "project_addr", property = "projectAddr", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "customer_num", property = "customerNum", jdbcType = JdbcType.INTEGER),
-            @Result(column = "project_coop_in", property = "projectCoopIn", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "project_need_count", property = "projectNeedCount", jdbcType = JdbcType.INTEGER),
-            @Result(column = "project_desc", property = "projectDesc", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "project_saleman", property = "projectSaleman", jdbcType = JdbcType.INTEGER),
-            @Result(column = "project_design_date", property = "projectDesignDate", jdbcType = JdbcType.TIMESTAMP)
-    })
-    List<Project> selectAll();
+    List<Project> findAllProjectName();
 
-    @Update({
-            "update project",
-            "set project_name = #{projectName,jdbcType=VARCHAR},",
-            "project_type = #{projectType,jdbcType=VARCHAR},",
-            "project_addr = #{projectAddr,jdbcType=VARCHAR},",
-            "customer_num = #{customerNum,jdbcType=INTEGER},",
-            "project_coop_in = #{projectCoopIn,jdbcType=VARCHAR},",
-            "project_need_count = #{projectNeedCount,jdbcType=INTEGER},",
-            "project_desc = #{projectDesc,jdbcType=VARCHAR},",
-            "project_saleman = #{projectSaleman,jdbcType=INTEGER},",
-            "project_design_date = #{projectDesignDate,jdbcType=TIMESTAMP}",
-            "where project_num = #{projectNum,jdbcType=VARCHAR}"
-    })
-    int updateByPrimaryKey(Project record);
 }

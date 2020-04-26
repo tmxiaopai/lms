@@ -4,8 +4,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
+ * The type Reflection utils.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/2 - 17:40
+ * @date 2020 /4/2 - 17:40
  * @package_name com.tmxf.lms.utils
  */
 public class ReflectionUtils {
@@ -15,7 +17,7 @@ public class ReflectionUtils {
      * @param object 要调用方法的对象
      * @param method 要调用的方法名
      * @param args   参数对象数组
-     * @return
+     * @return object
      */
     public static Object invoke(Object object, String method, Object... args) {
         Object result = null;
@@ -44,10 +46,10 @@ public class ReflectionUtils {
     /**
      * 根据方法名和参数对象查找方法
      *
-     * @param clazz
-     * @param name
+     * @param clazz the clazz
+     * @param name  the name
      * @param args  参数实例数据
-     * @return
+     * @return method
      */
     public static Method getMethod(Class<? extends Object> clazz, String name, Object[] args) {
         Method queryMethod = null;

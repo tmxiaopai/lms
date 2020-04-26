@@ -6,8 +6,10 @@ import lombok.Setter;
 import org.springframework.context.annotation.Bean;
 
 /**
+ * The type Login form.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/2 - 22:01
+ * @date 2020 /4/2 - 22:01
  * @package_name com.tmxf.lms.bean
  */
 @Getter

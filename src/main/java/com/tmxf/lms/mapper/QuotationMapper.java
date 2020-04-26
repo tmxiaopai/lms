@@ -1,89 +1,65 @@
 package com.tmxf.lms.mapper;
 
 import com.tmxf.lms.entity.Quotation;
-
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
-import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.JdbcType;
-
-@Mapper
+/**
+ * 报价书(Quotation)表数据库访问层
+ *
+ * @author makejava
+ * @since 2020-04-24 16:06:52
+ */
 public interface QuotationMapper {
-    @Delete({
-            "delete from quotation",
-            "where quotation_num = #{quotationNum,jdbcType=VARCHAR}"
-    })
-    int deleteByPrimaryKey(String quotationNum);
 
-    @Insert({
-            "insert into quotation (quotation_num, quotation_start_date, ",
-            "quotation_end_date, quotation_money, ",
-            "quotation_up_money, quotation_state, ",
-            "quotation_review_man, quotation_review_date, ",
-            "quotation_create_date, p_num)",
-            "values (#{quotationNum,jdbcType=VARCHAR}, #{quotationStartDate,jdbcType=DATE}, ",
-            "#{quotationEndDate,jdbcType=DATE}, #{quotationMoney,jdbcType=DOUBLE}, ",
-            "#{quotationUpMoney,jdbcType=VARCHAR}, #{quotationState,jdbcType=VARCHAR}, ",
-            "#{quotationReviewMan,jdbcType=VARCHAR}, #{quotationReviewDate,jdbcType=TIMESTAMP}, ",
-            "#{quotationCreateDate,jdbcType=TIMESTAMP}, #{pNum,jdbcType=VARCHAR})"
-    })
-    int insert(Quotation record);
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param qNum 主键
+     * @return 实例对象
+     */
+    Quotation queryById(String qNum);
 
-    @Select({
-            "select",
-            "quotation_num, quotation_start_date, quotation_end_date, quotation_money, quotation_up_money, ",
-            "quotation_state, quotation_review_man, quotation_review_date, quotation_create_date, ",
-            "p_num",
-            "from quotation",
-            "where quotation_num = #{quotationNum,jdbcType=VARCHAR}"
-    })
-    @Results({
-            @Result(column = "quotation_num", property = "quotationNum", jdbcType = JdbcType.VARCHAR, id = true),
-            @Result(column = "quotation_start_date", property = "quotationStartDate", jdbcType = JdbcType.DATE),
-            @Result(column = "quotation_end_date", property = "quotationEndDate", jdbcType = JdbcType.DATE),
-            @Result(column = "quotation_money", property = "quotationMoney", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "quotation_up_money", property = "quotationUpMoney", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "quotation_state", property = "quotationState", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "quotation_review_man", property = "quotationReviewMan", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "quotation_review_date", property = "quotationReviewDate", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "quotation_create_date", property = "quotationCreateDate", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "p_num", property = "pNum", jdbcType = JdbcType.VARCHAR)
-    })
-    Quotation selectByPrimaryKey(String quotationNum);
+    /**
+     * 查询指定行数据
+     *
+     * @param offset 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    List<Quotation> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
-    @Select({
-            "select",
-            "quotation_num, quotation_start_date, quotation_end_date, quotation_money, quotation_up_money, ",
-            "quotation_state, quotation_review_man, quotation_review_date, quotation_create_date, ",
-            "p_num",
-            "from quotation"
-    })
-    @Results({
-            @Result(column = "quotation_num", property = "quotationNum", jdbcType = JdbcType.VARCHAR, id = true),
-            @Result(column = "quotation_start_date", property = "quotationStartDate", jdbcType = JdbcType.DATE),
-            @Result(column = "quotation_end_date", property = "quotationEndDate", jdbcType = JdbcType.DATE),
-            @Result(column = "quotation_money", property = "quotationMoney", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "quotation_up_money", property = "quotationUpMoney", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "quotation_state", property = "quotationState", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "quotation_review_man", property = "quotationReviewMan", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "quotation_review_date", property = "quotationReviewDate", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "quotation_create_date", property = "quotationCreateDate", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "p_num", property = "pNum", jdbcType = JdbcType.VARCHAR)
-    })
-    List<Quotation> selectAll();
+    List<Quotation> queryByProNum(String projectNum);
+    /**
+     * 通过实体作为筛选条件查询
+     *
+     * @param quotation 实例对象
+     * @return 对象列表
+     */
+    List<Quotation> queryAll(Quotation quotation);
 
-    @Update({
-            "update quotation",
-            "set quotation_start_date = #{quotationStartDate,jdbcType=DATE},",
-            "quotation_end_date = #{quotationEndDate,jdbcType=DATE},",
-            "quotation_money = #{quotationMoney,jdbcType=DOUBLE},",
-            "quotation_up_money = #{quotationUpMoney,jdbcType=VARCHAR},",
-            "quotation_state = #{quotationState,jdbcType=VARCHAR},",
-            "quotation_review_man = #{quotationReviewMan,jdbcType=VARCHAR},",
-            "quotation_review_date = #{quotationReviewDate,jdbcType=TIMESTAMP},",
-            "quotation_create_date = #{quotationCreateDate,jdbcType=TIMESTAMP},",
-            "p_num = #{pNum,jdbcType=VARCHAR}",
-            "where quotation_num = #{quotationNum,jdbcType=VARCHAR}"
-    })
-    int updateByPrimaryKey(Quotation record);
+    /**
+     * 新增数据
+     *
+     * @param quotation 实例对象
+     * @return 影响行数
+     */
+    int insert(Quotation quotation);
+
+    /**
+     * 修改数据
+     *
+     * @param quotation 实例对象
+     * @return 影响行数
+     */
+    int update(Quotation quotation);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param qNum 主键
+     * @return 影响行数
+     */
+    int deleteById(String qNum);
+
 }

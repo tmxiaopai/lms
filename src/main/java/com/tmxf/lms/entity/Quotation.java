@@ -1,9 +1,6 @@
 package com.tmxf.lms.entity;
 
-import com.alibaba.fastjson.JSONObject;
-import lombok.Getter;
-import lombok.Setter;
-
+import java.math.BigDecimal;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -11,55 +8,100 @@ import java.io.Serializable;
  * 报价书(Quotation)实体类
  *
  * @author makejava
- * @since 2020-03-31 22:46:27
+ * @since 2020-04-24 16:06:50
  */
-@Getter
-@Setter
 public class Quotation implements Serializable {
-    private static final long serialVersionUID = -65629964325007588L;
+    private static final long serialVersionUID = -92373899508123024L;
     /**
-     * 报价书编号
-     */
-    private String quotationNum;
+    * 报价书编号
+    */
+    private String qNum;
+    
+    private BigDecimal qPrice;
     /**
-     * 报价书生效日期
-     */
-    private Object quotationStartDate;
+    * 报价书登记日期
+    */
+    private Date qDate;
     /**
-     * 报价书有效截止日期
-     */
-    private Object quotationEndDate;
+    * 生效期
+    */
+    private Date qStart;
     /**
-     * 报价金额
-     */
-    private Object quotationMoney;
+    * 失效日期
+    */
+    private Date qEnd;
     /**
-     * 报价大写金额
-     */
-    private String quotationUpMoney;
-    /**
-     * 报价书状态
-     */
-    private String quotationState;
-    /**
-     * 审核人
-     */
-    private String quotationReviewMan;
-    /**
-     * 审核时间
-     */
-    private Date quotationReviewDate;
-    /**
-     * 报价书创建时间
-     */
-    private Date quotationCreateDate;
-    /**
-     * 所属项目
-     */
-    private String pNum;
+    * 安装周期
+    */
+    private Integer qInstallDate;
+    
+    private String qProject;
+    
+    private String qDescription;
 
-    @Override
-    public String toString() {
-        return JSONObject.toJSONString(this);
+
+    public String getQNum() {
+        return qNum;
     }
+
+    public void setQNum(String qNum) {
+        this.qNum = qNum;
+    }
+
+    public BigDecimal getQPrice() {
+        return qPrice;
+    }
+
+    public void setQPrice(BigDecimal qPrice) {
+        this.qPrice = qPrice;
+    }
+
+    public Date getQDate() {
+        return qDate;
+    }
+
+    public void setQDate(Date qDate) {
+        this.qDate = qDate;
+    }
+
+    public Date getQStart() {
+        return qStart;
+    }
+
+    public void setQStart(Date qStart) {
+        this.qStart = qStart;
+    }
+
+    public Date getQEnd() {
+        return qEnd;
+    }
+
+    public void setQEnd(Date qEnd) {
+        this.qEnd = qEnd;
+    }
+
+    public Integer getQInstallDate() {
+        return qInstallDate;
+    }
+
+    public void setQInstallDate(Integer qInstallDate) {
+        this.qInstallDate = qInstallDate;
+    }
+
+    public String getQProject() {
+        return qProject;
+    }
+
+    public void setQProject(String qProject) {
+        this.qProject = qProject;
+    }
+
+    public String getQDescription() {
+        return qDescription;
+    }
+
+    public void setQDescription(String qDescription) {
+        this.qDescription = qDescription;
+    }
+
 }

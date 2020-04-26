@@ -18,8 +18,10 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
+ * The type Druid config.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/1 - 0:27
+ * @date 2020 /4/1 - 0:27
  * @package_name com.tmxf.lms.config
  */
 @Configuration
@@ -32,6 +34,11 @@ public class DruidConfig {
     @Resource
     private DruidDataSourceProperties properties;
 
+    /**
+     * Druid data source data source.
+     *
+     * @return the data source
+     */
     @Bean
     @ConditionalOnMissingBean
     public DataSource druidDataSource() {
@@ -66,7 +73,7 @@ public class DruidConfig {
     /**
      * 注册Servlet信息， 配置监控视图
      *
-     * @return
+     * @return servlet registration bean
      */
     @Bean
     @ConditionalOnMissingBean
@@ -89,7 +96,7 @@ public class DruidConfig {
     /**
      * 注册Filter信息, 监控拦截器
      *
-     * @return
+     * @return filter registration bean
      */
     @Bean
     @ConditionalOnMissingBean

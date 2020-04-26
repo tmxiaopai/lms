@@ -19,10 +19,21 @@ public class PasswordEncoder {
     private Object salt;
     private String algorithm;
 
+    /**
+     * Instantiates a new Password encoder.
+     *
+     * @param salt the salt
+     */
     public PasswordEncoder(Object salt) {
         this(salt, MD5);
     }
 
+    /**
+     * Instantiates a new Password encoder.
+     *
+     * @param salt      the salt
+     * @param algorithm the algorithm
+     */
     public PasswordEncoder(Object salt, String algorithm) {
         this.salt = salt;
         this.algorithm = algorithm;
@@ -31,8 +42,8 @@ public class PasswordEncoder {
     /**
      * 密码加密
      *
-     * @param rawPass
-     * @return
+     * @param rawPass the raw pass
+     * @return string
      */
     public String encode(String rawPass) {
         String result = null;
@@ -50,7 +61,7 @@ public class PasswordEncoder {
      *
      * @param encPass 密文
      * @param rawPass 明文
-     * @return
+     * @return boolean
      */
     public boolean matches(String encPass, String rawPass) {
         String pass1 = "" + encPass;

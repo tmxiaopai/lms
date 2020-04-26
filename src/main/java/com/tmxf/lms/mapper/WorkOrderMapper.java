@@ -1,90 +1,74 @@
 package com.tmxf.lms.mapper;
 
 import com.tmxf.lms.entity.WorkOrder;
-
 import java.util.List;
 
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
-@Mapper
+/**
+ * The interface Work order mapper.
+ */
 public interface WorkOrderMapper {
-    @Delete({
-            "delete from work_order",
-            "where wo_id = #{woId,jdbcType=INTEGER}"
-    })
-    int deleteByPrimaryKey(Integer woId);
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param faultId 主键
+     * @return 实例对象 work order
+     */
+    WorkOrder queryById(Integer faultId);
 
-    @Insert({
-            "insert into work_order (wo_id, wo_project, ",
-            "wo_type, wo_num, wo_date, ",
-            "wo_user, wo_date_resolve, ",
-            "wo_date_leave, wo_desc, ",
-            "wo_state, wo_lift_num)",
-            "values (#{woId,jdbcType=INTEGER}, #{woProject,jdbcType=VARCHAR}, ",
-            "#{woType,jdbcType=VARCHAR}, #{woNum,jdbcType=VARCHAR}, #{woDate,jdbcType=DATE}, ",
-            "#{woUser,jdbcType=INTEGER}, #{woDateResolve,jdbcType=TIMESTAMP}, ",
-            "#{woDateLeave,jdbcType=TIMESTAMP}, #{woDesc,jdbcType=VARCHAR}, ",
-            "#{woState,jdbcType=BIT}, #{woLiftNum,jdbcType=VARCHAR})"
-    })
-    int insert(WorkOrder record);
+    /**
+     * 查询指定行数据
+     *
+     * @param offset 查询起始位置
+     * @param limit  查询条数
+     * @return 对象列表 list
+     */
+    List<WorkOrder> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
-    @Select({
-            "select",
-            "wo_id, wo_project, wo_type, wo_num, wo_date, wo_user, wo_date_resolve, wo_date_leave, ",
-            "wo_desc, wo_state, wo_lift_num",
-            "from work_order",
-            "where wo_id = #{woId,jdbcType=INTEGER}"
-    })
-    @Results({
-            @Result(column = "wo_id", property = "woId", jdbcType = JdbcType.INTEGER, id = true),
-            @Result(column = "wo_project", property = "woProject", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "wo_type", property = "woType", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "wo_num", property = "woNum", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "wo_date", property = "woDate", jdbcType = JdbcType.DATE),
-            @Result(column = "wo_user", property = "woUser", jdbcType = JdbcType.INTEGER),
-            @Result(column = "wo_date_resolve", property = "woDateResolve", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "wo_date_leave", property = "woDateLeave", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "wo_desc", property = "woDesc", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "wo_state", property = "woState", jdbcType = JdbcType.BIT),
-            @Result(column = "wo_lift_num", property = "woLiftNum", jdbcType = JdbcType.VARCHAR)
-    })
-    WorkOrder selectByPrimaryKey(Integer woId);
 
-    @Select({
-            "select",
-            "wo_id, wo_project, wo_type, wo_num, wo_date, wo_user, wo_date_resolve, wo_date_leave, ",
-            "wo_desc, wo_state, wo_lift_num",
-            "from work_order"
-    })
-    @Results({
-            @Result(column = "wo_id", property = "woId", jdbcType = JdbcType.INTEGER, id = true),
-            @Result(column = "wo_project", property = "woProject", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "wo_type", property = "woType", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "wo_num", property = "woNum", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "wo_date", property = "woDate", jdbcType = JdbcType.DATE),
-            @Result(column = "wo_user", property = "woUser", jdbcType = JdbcType.INTEGER),
-            @Result(column = "wo_date_resolve", property = "woDateResolve", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "wo_date_leave", property = "woDateLeave", jdbcType = JdbcType.TIMESTAMP),
-            @Result(column = "wo_desc", property = "woDesc", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "wo_state", property = "woState", jdbcType = JdbcType.BIT),
-            @Result(column = "wo_lift_num", property = "woLiftNum", jdbcType = JdbcType.VARCHAR)
-    })
-    List<WorkOrder> selectAll();
+    /**
+     * 通过实体作为筛选条件查询
+     *
+     * @param workOrder 实例对象
+     * @return 对象列表 list
+     */
+    List<WorkOrder> queryAll(WorkOrder workOrder);
 
+    /**
+     * 新增数据
+     *
+     * @param workOrder 实例对象
+     * @return 影响行数 int
+     */
+    int insert(WorkOrder workOrder);
+
+    /**
+     * 修改数据
+     *
+     * @param workOrder 实例对象
+     * @return 影响行数 int
+     */
+    int update(WorkOrder workOrder);
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param faultId 主键
+     * @return 影响行数 int
+     */
+    int deleteById(Integer faultId);
+
+    /**
+     * 更新客户确认状态
+     *
+     * @param faultId the fault id
+     * @return int
+     */
     @Update({
-            "update work_order",
-            "set wo_project = #{woProject,jdbcType=VARCHAR},",
-            "wo_type = #{woType,jdbcType=VARCHAR},",
-            "wo_num = #{woNum,jdbcType=VARCHAR},",
-            "wo_date = #{woDate,jdbcType=DATE},",
-            "wo_user = #{woUser,jdbcType=INTEGER},",
-            "wo_date_resolve = #{woDateResolve,jdbcType=TIMESTAMP},",
-            "wo_date_leave = #{woDateLeave,jdbcType=TIMESTAMP},",
-            "wo_desc = #{woDesc,jdbcType=VARCHAR},",
-            "wo_state = #{woState,jdbcType=BIT},",
-            "wo_lift_num = #{woLiftNum,jdbcType=VARCHAR}",
-            "where wo_id = #{woId,jdbcType=INTEGER}"
+            "update work_order set confirm = 1 where fault_id=#{faultId}"
     })
-    int updateByPrimaryKey(WorkOrder record);
+    int updateConfirm(Integer faultId);
+
 }

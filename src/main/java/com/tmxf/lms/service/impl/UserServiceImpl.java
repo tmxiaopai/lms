@@ -1,17 +1,21 @@
 package com.tmxf.lms.service.impl;
 
-import com.tmxf.lms.entity.Customer;
 import com.tmxf.lms.entity.User;
 import com.tmxf.lms.mapper.UserMapper;
 import com.tmxf.lms.service.UserService;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
+ * The type User service.
+ *
  * @author TMXIAOPAI
- * @date 2020/3/31 - 23:20
+ * @date 2020 /3/31 - 23:20
  * @package_name com.tmxf.lms.service.Impl
  */
 @Service
@@ -31,21 +35,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int insertUser(User user) {
-        return userMapper.insertUser(user);
+        return userMapper.insert(user);
     }
 
-    @Override
-    public int findUserIdByUserNum(Integer userNum) {
-        return userMapper.findUserIdByUserNum(userNum);
-    }
 
     @Override
     public int updateUserBuPrimaryKey(User user) {
-        return userMapper.updateUserBuPrimaryKey(user);
+        return userMapper.update(user);
     }
 
     @Override
     public int deleteUser(Integer userId) {
         return userMapper.deleteUser(userId);
+    }
+    @Override
+    public String encodingPassword(String password, Integer userNum) {
+        return new SimpleHash("md5",password, ByteSource.Util.bytes(String.valueOf(userNum)),1024).toString();
+    }
+
+    @Override
+    public int updateLoginTime(Integer userNum) {
+        return userMapper.updateLoginTime(userNum,new Date());
+    }
+
+    @Override
+    public List<User> queryByUser(User user) {
+        return userMapper.queryAll(user);
     }
 }

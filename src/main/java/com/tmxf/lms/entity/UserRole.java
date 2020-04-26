@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 用户权限表(UserRole)实体类
  *
  * @author makejava
- * @since 2020-03-31 22:46:28
+ * @since 2020 -03-31 22:46:28
  */
 @Getter
 @Setter

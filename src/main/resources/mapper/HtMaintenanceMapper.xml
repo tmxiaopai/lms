@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.HtMaintenanceMapper">
+
+    <resultMap type="com.tmxf.lms.entity.HtMaintenance" id="HtMaintenanceMap">
+        <result property="htMNum" column="ht_m_num" jdbcType="VARCHAR"/>
+        <result property="pNum" column="p_num" jdbcType="VARCHAR"/>
+        <result property="htMCustomer" column="ht_m_customer" jdbcType="VARCHAR"/>
+        <result property="htMLiftCount" column="ht_m_lift_count" jdbcType="INTEGER"/>
+        <result property="htMMoney" column="ht_m_money" jdbcType="OTHER"/>
+        <result property="htMPayDateStyle" column="ht_m_pay_date_style" jdbcType="VARCHAR"/>
+        <result property="htMPayStyle" column="ht_m_pay_style" jdbcType="VARCHAR"/>
+        <result property="htMStyle" column="ht_m_style" jdbcType="VARCHAR"/>
+        <result property="htMStartDate" column="ht_m_start_date" jdbcType="TIMESTAMP"/>
+        <result property="htMEndDate" column="ht_m_end_date" jdbcType="TIMESTAMP"/>
+        <result property="htMSignDate" column="ht_m_sign_date" jdbcType="TIMESTAMP"/>
+        <result property="htMDesc" column="ht_m_desc" jdbcType="VARCHAR"/>
+        <result property="htMStatus" column="ht_m_status" jdbcType="OTHER"/>
+        <result property="htMMonth" column="ht_m_month" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="HtMaintenanceMap">
+        select ht_m_num,
+               p_num,
+               ht_m_customer,
+               ht_m_lift_count,
+               ht_m_money,
+               ht_m_pay_date_style,
+               ht_m_pay_style,
+               ht_m_style,
+               ht_m_start_date,
+               ht_m_end_date,
+               ht_m_sign_date,
+               ht_m_desc,
+               ht_m_status,
+               ht_m_month
+        from db_lms.ht_maintenance
+        where ht_m_num = #{htMNum}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="HtMaintenanceMap">
+        select ht_m_num,
+               p_num,
+               ht_m_customer,
+               ht_m_lift_count,
+               ht_m_money,
+               ht_m_pay_date_style,
+               ht_m_pay_style,
+               ht_m_style,
+               ht_m_start_date,
+               ht_m_end_date,
+               ht_m_sign_date,
+               ht_m_desc,
+               ht_m_status,
+               ht_m_month
+        from db_lms.ht_maintenance
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="HtMaintenanceMap">
+        select
+        ht_m_num, p_num, ht_m_customer, ht_m_lift_count, ht_m_money, ht_m_pay_date_style, ht_m_pay_style, ht_m_style,
+        ht_m_start_date, ht_m_end_date, ht_m_sign_date, ht_m_desc, ht_m_status, ht_m_month
+        from db_lms.ht_maintenance
+        <where>
+            <if test="htMNum != null and htMNum != ''">
+                and ht_m_num = #{htMNum}
+            </if>
+            <if test="pNum != null and pNum != ''">
+                and p_num = #{pNum}
+            </if>
+            <if test="htMCustomer != null and htMCustomer != ''">
+                and ht_m_customer = #{htMCustomer}
+            </if>
+            <if test="htMLiftCount != null">
+                and ht_m_lift_count = #{htMLiftCount}
+            </if>
+            <if test="htMMoney != null">
+                and ht_m_money = #{htMMoney}
+            </if>
+            <if test="htMPayDateStyle != null and htMPayDateStyle != ''">
+                and ht_m_pay_date_style = #{htMPayDateStyle}
+            </if>
+            <if test="htMPayStyle != null and htMPayStyle != ''">
+                and ht_m_pay_style = #{htMPayStyle}
+            </if>
+            <if test="htMStyle != null and htMStyle != ''">
+                and ht_m_style = #{htMStyle}
+            </if>
+            <if test="htMStartDate != null">
+                and ht_m_start_date = #{htMStartDate}
+            </if>
+            <if test="htMEndDate != null">
+                and ht_m_end_date = #{htMEndDate}
+            </if>
+            <if test="htMSignDate != null">
+                and ht_m_sign_date = #{htMSignDate}
+            </if>
+            <if test="htMDesc != null and htMDesc != ''">
+                and ht_m_desc = #{htMDesc}
+            </if>
+            <if test="htMStatus != null">
+                and ht_m_status = #{htMStatus}
+            </if>
+            <if test="htMMonth != null">
+                and ht_m_month = #{htMMonth}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into db_lms.ht_maintenance(ht_m_num, p_num, ht_m_customer, ht_m_lift_count, ht_m_money,
+                                          ht_m_pay_date_style, ht_m_pay_style, ht_m_style, ht_m_start_date,
+                                          ht_m_end_date, ht_m_sign_date, ht_m_desc, ht_m_status, ht_m_month)
+        values (#{htMNum}, #{pNum}, #{htMCustomer}, #{htMLiftCount}, #{htMMoney}, #{htMPayDateStyle}, #{htMPayStyle},
+                #{htMStyle}, #{htMStartDate}, #{htMEndDate}, #{htMSignDate}, #{htMDesc}, #{htMStatus},#{htMMonth})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.ht_maintenance
+        <set>
+            <if test="pNum != null and pNum != ''">
+                p_num = #{pNum},
+            </if>
+            <if test="htMCustomer != null and htMCustomer != ''">
+                ht_m_customer = #{htMCustomer},
+            </if>
+            <if test="htMLiftCount != null">
+                ht_m_lift_count = #{htMLiftCount},
+            </if>
+            <if test="htMMoney != null">
+                ht_m_money = #{htMMoney},
+            </if>
+            <if test="htMPayDateStyle != null and htMPayDateStyle != ''">
+                ht_m_pay_date_style = #{htMPayDateStyle},
+            </if>
+            <if test="htMPayStyle != null and htMPayStyle != ''">
+                ht_m_pay_style = #{htMPayStyle},
+            </if>
+            <if test="htMStyle != null and htMStyle != ''">
+                ht_m_style = #{htMStyle},
+            </if>
+            <if test="htMStartDate != null">
+                ht_m_start_date = #{htMStartDate},
+            </if>
+            <if test="htMEndDate != null">
+                ht_m_end_date = #{htMEndDate},
+            </if>
+            <if test="htMSignDate != null">
+                ht_m_sign_date = #{htMSignDate},
+            </if>
+            <if test="htMDesc != null and htMDesc != ''">
+                ht_m_desc = #{htMDesc},
+            </if>
+            <if test="htMStatus != null">
+                ht_m_status = #{htMStatus},
+            </if>
+            <if test="htMMonth != null">
+                ht_m_month=#{htMMonth}
+            </if>
+        </set>
+        where ht_m_num = #{htMNum}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from db_lms.ht_maintenance
+        where ht_m_num = #{htMNum}
+    </delete>
+
+</mapper>

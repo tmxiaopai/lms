@@ -7,17 +7,38 @@ import com.tmxf.lms.utils.ReflectionUtils;
 import java.util.List;
 
 /**
+ * The type Mybatis page helper.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/2 - 17:36
+ * @date 2020 /4/2 - 17:36
  * @package_name com.tmxf.lms.page
  */
 public class MybatisPageHelper {
+    /**
+     * The constant findPage.
+     */
     public static final String findPage = "findPage";
 
+    /**
+     * Find page page result.
+     *
+     * @param pageRequest the page request
+     * @param mapper      the mapper
+     * @return the page result
+     */
     public static PageResult findPage(PageRequest pageRequest, Object mapper) {
         return findPage(pageRequest, mapper, findPage);
     }
 
+    /**
+     * Find page page result.
+     *
+     * @param pageRequest     the page request
+     * @param mapper          the mapper
+     * @param queryMethodName the query method name
+     * @param args            the args
+     * @return the page result
+     */
     public static PageResult findPage(PageRequest pageRequest, Object mapper, String queryMethodName, Object... args) {
         // 设置分页参数
         int pageNum = pageRequest.getPageNum();

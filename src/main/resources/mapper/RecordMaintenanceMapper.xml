@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.RecordMaintenanceMapper">
+
+    <resultMap type="com.tmxf.lms.entity.RecordMaintenance" id="RecordMaintenanceMap">
+        <result property="rmId" column="rm_id" jdbcType="INTEGER"/>
+        <result property="rmLift" column="rm_lift" jdbcType="INTEGER"/>
+        <result property="rmDate" column="rm_date" jdbcType="TIMESTAMP"/>
+        <result property="rmType" column="rm_type" jdbcType="VARCHAR"/>
+        <result property="rmUser" column="rm_user" jdbcType="VARCHAR"/>
+        <result property="rmLogin" column="rm_login" jdbcType="TIMESTAMP"/>
+        <result property="rmLoginAddr" column="rm_login_addr" jdbcType="VARCHAR"/>
+        <result property="rmLogout" column="rm_logout" jdbcType="TIMESTAMP"/>
+        <result property="rmLogoutAddr" column="rm_logout_addr" jdbcType="VARCHAR"/>
+        <result property="rmUrl" column="rm_url" jdbcType="VARCHAR"/>
+        <result property="rmDescription" column="rm_description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="insertMany">
+        call insertMa2(#{liftNum},#{mDate},#{count})
+    </select>
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RecordMaintenanceMap">
+        select
+          rm_id, rm_lift, rm_date, rm_type, rm_user, rm_login, rm_login_addr, rm_logout, rm_logout_addr, rm_url, rm_description
+        from db_lms.record_maintenance
+        where rm_id = #{rmId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RecordMaintenanceMap">
+        select
+          rm_id, rm_lift, rm_date, rm_type, rm_user, rm_login, rm_login_addr, rm_logout, rm_logout_addr, rm_url, rm_description
+        from db_lms.record_maintenance
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RecordMaintenanceMap">
+        select
+          rm_id, rm_lift, rm_date, rm_type, rm_user, rm_login, rm_login_addr, rm_logout, rm_logout_addr, rm_url, rm_description
+        from db_lms.record_maintenance
+        <where>
+            <if test="rmId != null">
+                and rm_id = #{rmId}
+            </if>
+            <if test="rmLift != null">
+                and rm_lift = #{rmLift}
+            </if>
+            <if test="rmDate != null">
+                and rm_date = #{rmDate}
+            </if>
+            <if test="rmType != null and rmType != ''">
+                and rm_type = #{rmType}
+            </if>
+            <if test="rmUser != null and rmUser != ''">
+                and rm_user = #{rmUser}
+            </if>
+            <if test="rmLogin != null">
+                and rm_login = #{rmLogin}
+            </if>
+            <if test="rmLoginAddr != null and rmLoginAddr != ''">
+                and rm_login_addr = #{rmLoginAddr}
+            </if>
+            <if test="rmLogout != null">
+                and rm_logout = #{rmLogout}
+            </if>
+            <if test="rmLogoutAddr != null and rmLogoutAddr != ''">
+                and rm_logout_addr = #{rmLogoutAddr}
+            </if>
+            <if test="rmUrl != null and rmUrl != ''">
+                and rm_url = #{rmUrl}
+            </if>
+            <if test="rmDescription != null and rmDescription != ''">
+                and rm_description = #{rmDescription}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="rmId" useGeneratedKeys="true">
+        insert into db_lms.record_maintenance(rm_lift, rm_date, rm_type, rm_user, rm_login, rm_login_addr, rm_logout, rm_logout_addr, rm_url, rm_description)
+        values (#{rmLift}, #{rmDate}, #{rmType}, #{rmUser}, #{rmLogin}, #{rmLoginAddr}, #{rmLogout}, #{rmLogoutAddr}, #{rmUrl}, #{rmDescription})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.record_maintenance
+        <set>
+            <if test="rmLift != null">
+                rm_lift = #{rmLift},
+            </if>
+            <if test="rmDate != null">
+                rm_date = #{rmDate},
+            </if>
+            <if test="rmType != null and rmType != ''">
+                rm_type = #{rmType},
+            </if>
+            <if test="rmUser != null and rmUser != ''">
+                rm_user = #{rmUser},
+            </if>
+            <if test="rmLogin != null">
+                rm_login = #{rmLogin},
+            </if>
+            <if test="rmLoginAddr != null and rmLoginAddr != ''">
+                rm_login_addr = #{rmLoginAddr},
+            </if>
+            <if test="rmLogout != null">
+                rm_logout = #{rmLogout},
+            </if>
+            <if test="rmLogoutAddr != null and rmLogoutAddr != ''">
+                rm_logout_addr = #{rmLogoutAddr},
+            </if>
+            <if test="rmUrl != null and rmUrl != ''">
+                rm_url = #{rmUrl},
+            </if>
+            <if test="rmDescription != null and rmDescription != ''">
+                rm_description = #{rmDescription},
+            </if>
+        </set>
+        where rm_id = #{rmId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_lms.record_maintenance where rm_id = #{rmId}
+    </delete>
+
+</mapper>

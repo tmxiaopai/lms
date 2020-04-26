@@ -7,31 +7,33 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * The interface Notice service.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/8 - 23:15
+ * @date 2020 /4/8 - 23:15
  * @package_name com.tmxf.lms.service
  */
 public interface NoticeService {
     /**
      * 查找所有公告
      *
-     * @return
+     * @return list
      */
     List<Notice> findAllNotice();
-
+    List<Notice> findWNotice();
     /**
      * 插入公告数据
      *
-     * @param notice
-     * @return
+     * @param notice the notice
+     * @return int
      */
     int insertNotice(Notice notice);
 
     /**
      * 通过公告ID删除公告
      *
-     * @param noticeId
-     * @return
+     * @param noticeId the notice id
+     * @return int
      */
     int deleteByNoticeID(Integer noticeId);
 }

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.HtSaleMapper">
+
+    <resultMap type="com.tmxf.lms.entity.HtSale" id="HtSaleMap">
+        <result property="htSaleNum" column="ht_sale_num" jdbcType="VARCHAR"/>
+        <result property="htSaleStartDate" column="ht_sale_start_date" jdbcType="TIMESTAMP"/>
+        <result property="htSaleEndDate" column="ht_sale_end_date" jdbcType="TIMESTAMP"/>
+        <result property="htSaleWarranty" column="ht_sale_warranty" jdbcType="INTEGER"/>
+        <result property="htSaleMoney" column="ht_sale_money" jdbcType="DECIMAL"/>
+        <result property="htSaleState" column="ht_sale_state" jdbcType="TINYINT"/>
+        <result property="pNum" column="p_num" jdbcType="VARCHAR"/>
+        <result property="htSalePayStyle" column="ht_sale_pay_style" jdbcType="VARCHAR"/>
+        <result property="htSaleDingjin" column="ht_sale_dingjin" jdbcType="DECIMAL"/>
+        <result property="htSaleDingjinRate" column="ht_sale_dingjin_rate" jdbcType="INTEGER"/>
+        <result property="htSaleTihuokuanRate" column="ht_sale_tihuokuan_rate" jdbcType="INTEGER"/>
+        <result property="htSaleTihuokuan" column="ht_sale_tihuokuan" jdbcType="DECIMAL"/>
+        <result property="htSaleDesc" column="ht_sale_desc" jdbcType="VARCHAR"/>
+        <result property="htSaleIsFinish" column="ht_sale_is_finish" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="HtSaleMap">
+        select
+          ht_sale_num, ht_sale_start_date, ht_sale_end_date, ht_sale_warranty, ht_sale_money, ht_sale_state, p_num, ht_sale_pay_style, ht_sale_dingjin, ht_sale_dingjin_rate, ht_sale_tihuokuan_rate, ht_sale_tihuokuan, ht_sale_desc, ht_sale_is_finish
+        from db_lms.ht_sale
+        where ht_sale_num = #{htSaleNum}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="HtSaleMap">
+        select
+          ht_sale_num, ht_sale_start_date, ht_sale_end_date, ht_sale_warranty, ht_sale_money, ht_sale_state, p_num, ht_sale_pay_style, ht_sale_dingjin, ht_sale_dingjin_rate, ht_sale_tihuokuan_rate, ht_sale_tihuokuan, ht_sale_desc, ht_sale_is_finish
+        from db_lms.ht_sale
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="HtSaleMap">
+        select
+          ht_sale_num, ht_sale_start_date, ht_sale_end_date, ht_sale_warranty, ht_sale_money, ht_sale_state, p_num, ht_sale_pay_style, ht_sale_dingjin, ht_sale_dingjin_rate, ht_sale_tihuokuan_rate, ht_sale_tihuokuan, ht_sale_desc, ht_sale_is_finish
+        from db_lms.ht_sale
+        <where>
+            <if test="htSaleNum != null and htSaleNum != ''">
+                and ht_sale_num = #{htSaleNum}
+            </if>
+            <if test="htSaleStartDate != null">
+                and ht_sale_start_date = #{htSaleStartDate}
+            </if>
+            <if test="htSaleEndDate != null">
+                and ht_sale_end_date = #{htSaleEndDate}
+            </if>
+            <if test="htSaleWarranty != null">
+                and ht_sale_warranty = #{htSaleWarranty}
+            </if>
+            <if test="htSaleMoney != null">
+                and ht_sale_money = #{htSaleMoney}
+            </if>
+            <if test="htSaleState != null">
+                and ht_sale_state = #{htSaleState}
+            </if>
+            <if test="pNum != null and pNum != ''">
+                and p_num = #{pNum}
+            </if>
+            <if test="htSalePayStyle != null and htSalePayStyle != ''">
+                and ht_sale_pay_style = #{htSalePayStyle}
+            </if>
+            <if test="htSaleDingjin != null">
+                and ht_sale_dingjin = #{htSaleDingjin}
+            </if>
+            <if test="htSaleDingjinRate != null">
+                and ht_sale_dingjin_rate = #{htSaleDingjinRate}
+            </if>
+            <if test="htSaleTihuokuanRate != null">
+                and ht_sale_tihuokuan_rate = #{htSaleTihuokuanRate}
+            </if>
+            <if test="htSaleTihuokuan != null">
+                and ht_sale_tihuokuan = #{htSaleTihuokuan}
+            </if>
+            <if test="htSaleDesc != null and htSaleDesc != ''">
+                and ht_sale_desc = #{htSaleDesc}
+            </if>
+            <if test="htSaleIsFinish != null">
+                and ht_sale_is_finish = #{htSaleIsFinish}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into db_lms.ht_sale(ht_sale_num,ht_sale_start_date, ht_sale_end_date, ht_sale_warranty, ht_sale_money, ht_sale_state, p_num, ht_sale_pay_style, ht_sale_dingjin, ht_sale_dingjin_rate, ht_sale_tihuokuan_rate, ht_sale_tihuokuan, ht_sale_desc, ht_sale_is_finish)
+        values (#{htSaleNum},#{htSaleStartDate}, #{htSaleEndDate}, #{htSaleWarranty}, #{htSaleMoney}, #{htSaleState}, #{pNum}, #{htSalePayStyle}, #{htSaleDingjin}, #{htSaleDingjinRate}, #{htSaleTihuokuanRate}, #{htSaleTihuokuan}, #{htSaleDesc}, #{htSaleIsFinish})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.ht_sale
+        <set>
+            <if test="htSaleStartDate != null">
+                ht_sale_start_date = #{htSaleStartDate},
+            </if>
+            <if test="htSaleEndDate != null">
+                ht_sale_end_date = #{htSaleEndDate},
+            </if>
+            <if test="htSaleWarranty != null">
+                ht_sale_warranty = #{htSaleWarranty},
+            </if>
+            <if test="htSaleMoney != null">
+                ht_sale_money = #{htSaleMoney},
+            </if>
+            <if test="htSaleState != null">
+                ht_sale_state = #{htSaleState},
+            </if>
+            <if test="pNum != null and pNum != ''">
+                p_num = #{pNum},
+            </if>
+            <if test="htSalePayStyle != null and htSalePayStyle != ''">
+                ht_sale_pay_style = #{htSalePayStyle},
+            </if>
+            <if test="htSaleDingjin != null">
+                ht_sale_dingjin = #{htSaleDingjin},
+            </if>
+            <if test="htSaleDingjinRate != null">
+                ht_sale_dingjin_rate = #{htSaleDingjinRate},
+            </if>
+            <if test="htSaleTihuokuanRate != null">
+                ht_sale_tihuokuan_rate = #{htSaleTihuokuanRate},
+            </if>
+            <if test="htSaleTihuokuan != null">
+                ht_sale_tihuokuan = #{htSaleTihuokuan},
+            </if>
+            <if test="htSaleDesc != null and htSaleDesc != ''">
+                ht_sale_desc = #{htSaleDesc},
+            </if>
+            <if test="htSaleIsFinish != null">
+                ht_sale_is_finish = #{htSaleIsFinish},
+            </if>
+        </set>
+        where ht_sale_num = #{htSaleNum}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_lms.ht_sale where ht_sale_num = #{htSaleNum}
+    </delete>
+
+</mapper>

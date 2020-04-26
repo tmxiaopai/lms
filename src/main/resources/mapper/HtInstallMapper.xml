@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.HtInstallMapper">
+
+    <resultMap type="com.tmxf.lms.entity.HtInstall" id="HtInstallMap">
+        <result property="htInstallNum" column="ht_install_num" jdbcType="VARCHAR"/>
+        <result property="pNum" column="p_num" jdbcType="VARCHAR"/>
+        <result property="htInstallDate" column="ht_install_date" jdbcType="TIMESTAMP"/>
+        <result property="htInstallLiftCount" column="ht_install_lift_count" jdbcType="INTEGER"/>
+        <result property="htInstallStartDate" column="ht_install_start_date" jdbcType="TIMESTAMP"/>
+        <result property="htInstallEndDate" column="ht_install_end_date" jdbcType="TIMESTAMP"/>
+        <result property="htInstallLiftCompany" column="ht_install_lift_company" jdbcType="VARCHAR"/>
+        <result property="htInstallMoney" column="ht_install_money" jdbcType="OTHER"/>
+        <result property="htInstallState" column="ht_install_state" jdbcType="OTHER"/>
+        <result property="htInstallFirstRate" column="ht_install_first_rate" jdbcType="INTEGER"/>
+        <result property="htInstallSecondRate" column="ht_install_second_rate" jdbcType="INTEGER"/>
+        <result property="htInstallThirdRate" column="ht_install_third_rate" jdbcType="INTEGER"/>
+        <result property="htInstallFirstM" column="ht_install_first_m" jdbcType="OTHER"/>
+        <result property="htInstallSecondM" column="ht_install_second_m" jdbcType="OTHER"/>
+        <result property="htInstallThirdM" column="ht_install_third_m" jdbcType="OTHER"/>
+        <result property="htInstallDesc" column="ht_install_desc" jdbcType="VARCHAR"/>
+        <result property="htInstallFirstReady" column="ht_install_first_ready" jdbcType="OTHER"/>
+        <result property="htInstallSecondReady" column="ht_install_second_ready" jdbcType="OTHER"/>
+        <result property="htInstallThirdReady" column="ht_install_third_ready" jdbcType="OTHER"/>
+        <result property="htInstallZhibaoqi" column="ht_install_zhibaoqi" jdbcType="INTEGER"/>
+        <result property="htInstallFinishDate" column="ht_install_finish_date" jdbcType="TIMESTAMP"/>
+        <result property="htInstallPlanDate" column="ht_install_plan_date" jdbcType="INTEGER"/>
+        <result property="htInstallMan" column="ht_install_man" jdbcType="VARCHAR"/>
+        <result property="htInstallPhone" column="ht_install_phone" jdbcType="VARCHAR"/>
+        <result property="htInstallAddr" column="ht_install_addr" jdbcType="VARCHAR"/>
+        <result property="htInstallYiMan" column="ht_install_yi_man" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="HtInstallMap">
+        select
+          ht_install_num, p_num, ht_install_date, ht_install_lift_count, ht_install_start_date, ht_install_end_date, ht_install_lift_company, ht_install_money, ht_install_state, ht_install_first_rate, ht_install_second_rate, ht_install_third_rate, ht_install_first_m, ht_install_second_m, ht_install_third_m, ht_install_desc, ht_install_first_ready, ht_install_second_ready, ht_install_third_ready, ht_install_zhibaoqi, ht_install_finish_date, ht_install_plan_date, ht_install_man, ht_install_phone, ht_install_addr, ht_install_yi_man
+        from db_lms.ht_install
+        where ht_install_num = #{htInstallNum}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="HtInstallMap">
+        select
+          ht_install_num, p_num, ht_install_date, ht_install_lift_count, ht_install_start_date, ht_install_end_date, ht_install_lift_company, ht_install_money, ht_install_state, ht_install_first_rate, ht_install_second_rate, ht_install_third_rate, ht_install_first_m, ht_install_second_m, ht_install_third_m, ht_install_desc, ht_install_first_ready, ht_install_second_ready, ht_install_third_ready, ht_install_zhibaoqi, ht_install_finish_date, ht_install_plan_date, ht_install_man, ht_install_phone, ht_install_addr, ht_install_yi_man
+        from db_lms.ht_install
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="HtInstallMap">
+        select
+          ht_install_num, p_num, ht_install_date, ht_install_lift_count, ht_install_start_date, ht_install_end_date, ht_install_lift_company, ht_install_money, ht_install_state, ht_install_first_rate, ht_install_second_rate, ht_install_third_rate, ht_install_first_m, ht_install_second_m, ht_install_third_m, ht_install_desc, ht_install_first_ready, ht_install_second_ready, ht_install_third_ready, ht_install_zhibaoqi, ht_install_finish_date, ht_install_plan_date, ht_install_man, ht_install_phone, ht_install_addr, ht_install_yi_man
+        from db_lms.ht_install
+        <where>
+            <if test="htInstallNum != null and htInstallNum != ''">
+                and ht_install_num = #{htInstallNum}
+            </if>
+            <if test="pNum != null and pNum != ''">
+                and p_num = #{pNum}
+            </if>
+            <if test="htInstallDate != null">
+                and ht_install_date = #{htInstallDate}
+            </if>
+            <if test="htInstallLiftCount != null">
+                and ht_install_lift_count = #{htInstallLiftCount}
+            </if>
+            <if test="htInstallStartDate != null">
+                and ht_install_start_date = #{htInstallStartDate}
+            </if>
+            <if test="htInstallEndDate != null">
+                and ht_install_end_date = #{htInstallEndDate}
+            </if>
+            <if test="htInstallLiftCompany != null and htInstallLiftCompany != ''">
+                and ht_install_lift_company = #{htInstallLiftCompany}
+            </if>
+            <if test="htInstallMoney != null">
+                and ht_install_money = #{htInstallMoney}
+            </if>
+            <if test="htInstallState != null">
+                and ht_install_state = #{htInstallState}
+            </if>
+            <if test="htInstallFirstRate != null">
+                and ht_install_first_rate = #{htInstallFirstRate}
+            </if>
+            <if test="htInstallSecondRate != null">
+                and ht_install_second_rate = #{htInstallSecondRate}
+            </if>
+            <if test="htInstallThirdRate != null">
+                and ht_install_third_rate = #{htInstallThirdRate}
+            </if>
+            <if test="htInstallFirstM != null">
+                and ht_install_first_m = #{htInstallFirstM}
+            </if>
+            <if test="htInstallSecondM != null">
+                and ht_install_second_m = #{htInstallSecondM}
+            </if>
+            <if test="htInstallThirdM != null">
+                and ht_install_third_m = #{htInstallThirdM}
+            </if>
+            <if test="htInstallDesc != null and htInstallDesc != ''">
+                and ht_install_desc = #{htInstallDesc}
+            </if>
+            <if test="htInstallFirstReady != null">
+                and ht_install_first_ready = #{htInstallFirstReady}
+            </if>
+            <if test="htInstallSecondReady != null">
+                and ht_install_second_ready = #{htInstallSecondReady}
+            </if>
+            <if test="htInstallThirdReady != null">
+                and ht_install_third_ready = #{htInstallThirdReady}
+            </if>
+            <if test="htInstallZhibaoqi != null">
+                and ht_install_zhibaoqi = #{htInstallZhibaoqi}
+            </if>
+            <if test="htInstallFinishDate != null">
+                and ht_install_finish_date = #{htInstallFinishDate}
+            </if>
+            <if test="htInstallPlanDate != null">
+                and ht_install_plan_date = #{htInstallPlanDate}
+            </if>
+            <if test="htInstallMan != null and htInstallMan != ''">
+                and ht_install_man = #{htInstallMan}
+            </if>
+            <if test="htInstallPhone != null and htInstallPhone != ''">
+                and ht_install_phone = #{htInstallPhone}
+            </if>
+            <if test="htInstallAddr != null and htInstallAddr != ''">
+                and ht_install_addr = #{htInstallAddr}
+            </if>
+            <if test="htInstallYiMan != null and htInstallYiMan != ''">
+                and ht_install_yi_man = #{htInstallYiMan}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into db_lms.ht_install(ht_install_num,p_num, ht_install_date, ht_install_lift_count, ht_install_start_date, ht_install_end_date, ht_install_lift_company, ht_install_money, ht_install_state, ht_install_first_rate, ht_install_second_rate, ht_install_third_rate, ht_install_first_m, ht_install_second_m, ht_install_third_m, ht_install_desc, ht_install_first_ready, ht_install_second_ready, ht_install_third_ready, ht_install_zhibaoqi, ht_install_finish_date, ht_install_plan_date, ht_install_man, ht_install_phone, ht_install_addr, ht_install_yi_man)
+        values (#{htInstallNum},#{pNum}, #{htInstallDate}, #{htInstallLiftCount}, #{htInstallStartDate}, #{htInstallEndDate}, #{htInstallLiftCompany}, #{htInstallMoney}, #{htInstallState}, #{htInstallFirstRate}, #{htInstallSecondRate}, #{htInstallThirdRate}, #{htInstallFirstM}, #{htInstallSecondM}, #{htInstallThirdM}, #{htInstallDesc}, #{htInstallFirstReady}, #{htInstallSecondReady}, #{htInstallThirdReady}, #{htInstallZhibaoqi}, #{htInstallFinishDate}, #{htInstallPlanDate}, #{htInstallMan}, #{htInstallPhone}, #{htInstallAddr}, #{htInstallYiMan})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.ht_install
+        <set>
+            <if test="pNum != null and pNum != ''">
+                p_num = #{pNum},
+            </if>
+            <if test="htInstallDate != null">
+                ht_install_date = #{htInstallDate},
+            </if>
+            <if test="htInstallLiftCount != null">
+                ht_install_lift_count = #{htInstallLiftCount},
+            </if>
+            <if test="htInstallStartDate != null">
+                ht_install_start_date = #{htInstallStartDate},
+            </if>
+            <if test="htInstallEndDate != null">
+                ht_install_end_date = #{htInstallEndDate},
+            </if>
+            <if test="htInstallLiftCompany != null and htInstallLiftCompany != ''">
+                ht_install_lift_company = #{htInstallLiftCompany},
+            </if>
+            <if test="htInstallMoney != null">
+                ht_install_money = #{htInstallMoney},
+            </if>
+            <if test="htInstallState != null">
+                ht_install_state = #{htInstallState},
+            </if>
+            <if test="htInstallFirstRate != null">
+                ht_install_first_rate = #{htInstallFirstRate},
+            </if>
+            <if test="htInstallSecondRate != null">
+                ht_install_second_rate = #{htInstallSecondRate},
+            </if>
+            <if test="htInstallThirdRate != null">
+                ht_install_third_rate = #{htInstallThirdRate},
+            </if>
+            <if test="htInstallFirstM != null">
+                ht_install_first_m = #{htInstallFirstM},
+            </if>
+            <if test="htInstallSecondM != null">
+                ht_install_second_m = #{htInstallSecondM},
+            </if>
+            <if test="htInstallThirdM != null">
+                ht_install_third_m = #{htInstallThirdM},
+            </if>
+            <if test="htInstallDesc != null and htInstallDesc != ''">
+                ht_install_desc = #{htInstallDesc},
+            </if>
+            <if test="htInstallFirstReady != null">
+                ht_install_first_ready = #{htInstallFirstReady},
+            </if>
+            <if test="htInstallSecondReady != null">
+                ht_install_second_ready = #{htInstallSecondReady},
+            </if>
+            <if test="htInstallThirdReady != null">
+                ht_install_third_ready = #{htInstallThirdReady},
+            </if>
+            <if test="htInstallZhibaoqi != null">
+                ht_install_zhibaoqi = #{htInstallZhibaoqi},
+            </if>
+            <if test="htInstallFinishDate != null">
+                ht_install_finish_date = #{htInstallFinishDate},
+            </if>
+            <if test="htInstallPlanDate != null">
+                ht_install_plan_date = #{htInstallPlanDate},
+            </if>
+            <if test="htInstallMan != null and htInstallMan != ''">
+                ht_install_man = #{htInstallMan},
+            </if>
+            <if test="htInstallPhone != null and htInstallPhone != ''">
+                ht_install_phone = #{htInstallPhone},
+            </if>
+            <if test="htInstallAddr != null and htInstallAddr != ''">
+                ht_install_addr = #{htInstallAddr},
+            </if>
+            <if test="htInstallYiMan != null and htInstallYiMan != ''">
+                ht_install_yi_man = #{htInstallYiMan},
+            </if>
+        </set>
+        where ht_install_num = #{htInstallNum}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_lms.ht_install where ht_install_num = #{htInstallNum}
+    </delete>
+
+</mapper>

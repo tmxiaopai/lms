@@ -21,21 +21,19 @@ spring:
       max-open-prepared-statements: 50
       max-pool-prepared-statement-per-connection-size: 20
 
+#  devtools:
+#      restart:
+#        enabled: true
+#        additional-paths: src/main/java
+#      add-properties: true
 mybatis:
   type-aliases-package: com.tmxf.lms.entity
-
-# mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:/mapper/*.xml
 
 
 server:
   port: 8005
 
-
-#pagehelper:
-#  helper-dialect: mysql
-#  reasonable: true
-#  support-methods-arguments: true
-#  params: count=countSql
 logging:
   level:
     com.tmxf.lms.mapper: debug

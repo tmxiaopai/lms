@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.RecordmaMapper">
+
+    <resultMap type="com.tmxf.lms.entity.Recordma" id="RecordmaMap">
+        <result property="factoryNum" column="factory_num" jdbcType="VARCHAR"/>
+        <result property="projectNum" column="project_num" jdbcType="VARCHAR"/>
+        <result property="customerName" column="customer_name" jdbcType="VARCHAR"/>
+        <result property="projectAddress" column="project_address" jdbcType="VARCHAR"/>
+        <result property="rmId" column="rm_id" jdbcType="INTEGER"/>
+        <result property="rmLift" column="rm_lift" jdbcType="INTEGER"/>
+        <result property="rmDate" column="rm_date" jdbcType="TIMESTAMP"/>
+        <result property="rmType" column="rm_type" jdbcType="VARCHAR"/>
+        <result property="rmUser" column="rm_user" jdbcType="VARCHAR"/>
+        <result property="rmLogin" column="rm_login" jdbcType="TIMESTAMP"/>
+        <result property="rmLoginAddr" column="rm_login_addr" jdbcType="VARCHAR"/>
+        <result property="rmLogout" column="rm_logout" jdbcType="TIMESTAMP"/>
+        <result property="rmLogoutAddr" column="rm_logout_addr" jdbcType="VARCHAR"/>
+        <result property="rmUrl" column="rm_url" jdbcType="VARCHAR"/>
+        <result property="rmDescription" column="rm_description" jdbcType="VARCHAR"/>
+        <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="RecordmaMap">
+        select
+          factory_num, project_num, customer_name, project_address, rm_id, rm_lift, rm_date, rm_type, rm_user, rm_login, rm_login_addr, rm_logout, rm_logout_addr, rm_url, rm_description, project_name
+        from db_lms.recordma
+        <where>
+            <if test="factoryNum != null and factoryNum != ''">
+                and factory_num = #{factoryNum}
+            </if>
+            <if test="projectNum != null and projectNum != ''">
+                and project_num = #{projectNum}
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name = #{customerName}
+            </if>
+            <if test="projectAddress != null and projectAddress != ''">
+                and project_address = #{projectAddress}
+            </if>
+            <if test="rmId != null">
+                and rm_id = #{rmId}
+            </if>
+            <if test="rmLift != null">
+                and rm_lift = #{rmLift}
+            </if>
+            <if test="rmDate != null">
+                and rm_date = #{rmDate}
+            </if>
+            <if test="rmType != null and rmType != ''">
+                and rm_type = #{rmType}
+            </if>
+            <if test="rmUser != null and rmUser != ''">
+                and rm_user = #{rmUser}
+            </if>
+            <if test="rmLogin != null">
+                and rm_login = #{rmLogin}
+            </if>
+            <if test="rmLoginAddr != null and rmLoginAddr != ''">
+                and rm_login_addr = #{rmLoginAddr}
+            </if>
+            <if test="rmLogout != null">
+                and rm_logout = #{rmLogout}
+            </if>
+            <if test="rmLogoutAddr != null and rmLogoutAddr != ''">
+                and rm_logout_addr = #{rmLogoutAddr}
+            </if>
+            <if test="rmUrl != null and rmUrl != ''">
+                and rm_url = #{rmUrl}
+            </if>
+            <if test="rmDescription != null and rmDescription != ''">
+                and rm_description = #{rmDescription}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name = #{projectName}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into db_lms.recordma(factory_num, project_num, customer_name, project_address, rm_id, rm_lift, rm_date, rm_type, rm_user, rm_login, rm_login_addr, rm_logout, rm_logout_addr, rm_url, rm_description, project_name)
+        values (#{factoryNum}, #{projectNum}, #{customerName}, #{projectAddress}, #{rmId}, #{rmLift}, #{rmDate}, #{rmType}, #{rmUser}, #{rmLogin}, #{rmLoginAddr}, #{rmLogout}, #{rmLogoutAddr}, #{rmUrl}, #{rmDescription}, #{projectName})
+    </insert>
+
+
+
+</mapper>

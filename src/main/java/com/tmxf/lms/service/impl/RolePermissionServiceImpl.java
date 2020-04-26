@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
+ * The type Role permission service.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/7 - 16:14
+ * @date 2020 /4/7 - 16:14
  * @package_name com.tmxf.lms.service.impl
  */
 @Service

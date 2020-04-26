@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.WorkOrderMapper">
+
+    <resultMap type="com.tmxf.lms.entity.WorkOrder" id="WorkOrderMap">
+        <result property="faultId" column="fault_id" jdbcType="INTEGER"/>
+        <result property="faultDescription" column="fault_description" jdbcType="VARCHAR"/>
+        <result property="faultLift" column="fault_lift" jdbcType="VARCHAR"/>
+        <result property="checkInMan" column="check_in_man" jdbcType="VARCHAR"/>
+        <result property="checkInPhone" column="check_in_phone" jdbcType="VARCHAR"/>
+        <result property="faultDate" column="fault_date" jdbcType="TIMESTAMP"/>
+        <result property="registerMan" column="register_man" jdbcType="VARCHAR"/>
+        <result property="solveMan" column="solve_man" jdbcType="VARCHAR"/>
+        <result property="isSolve" column="is_solve" jdbcType="TINYINT"/>
+        <result property="faultReason" column="fault_reason" jdbcType="VARCHAR"/>
+        <result property="solvePlan" column="solve_plan" jdbcType="VARCHAR"/>
+        <result property="solveDate" column="solve_date" jdbcType="TIMESTAMP"/>
+        <result property="confirm" column="confirm" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="WorkOrderMap">
+        select
+          fault_id, fault_description, fault_lift, check_in_man, check_in_phone, fault_date, register_man, solve_man, is_solve, fault_reason, solve_plan, solve_date, confirm
+        from db_lms.work_order
+        where fault_id = #{faultId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="WorkOrderMap">
+        select
+          fault_id, fault_description, fault_lift, check_in_man, check_in_phone, fault_date, register_man, solve_man, is_solve, fault_reason, solve_plan, solve_date, confirm
+        from db_lms.work_order
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="WorkOrderMap">
+        select
+          fault_id, fault_description, fault_lift, check_in_man, check_in_phone, fault_date, register_man, solve_man, is_solve, fault_reason, solve_plan, solve_date, confirm
+        from db_lms.work_order
+        <where>
+            <if test="faultId != null">
+                and fault_id = #{faultId}
+            </if>
+            <if test="faultDescription != null and faultDescription != ''">
+                and fault_description = #{faultDescription}
+            </if>
+            <if test="faultLift != null and faultLift != ''">
+                and fault_lift = #{faultLift}
+            </if>
+            <if test="checkInMan != null and checkInMan != ''">
+                and check_in_man = #{checkInMan}
+            </if>
+            <if test="checkInPhone != null and checkInPhone != ''">
+                and check_in_phone = #{checkInPhone}
+            </if>
+            <if test="faultDate != null">
+                and fault_date = #{faultDate}
+            </if>
+            <if test="registerMan != null and registerMan != ''">
+                and register_man = #{registerMan}
+            </if>
+            <if test="solveMan != null and solveMan != ''">
+                and solve_man = #{solveMan}
+            </if>
+            <if test="isSolve != null">
+                and is_solve = #{isSolve}
+            </if>
+            <if test="faultReason != null and faultReason != ''">
+                and fault_reason = #{faultReason}
+            </if>
+            <if test="solvePlan != null and solvePlan != ''">
+                and solve_plan = #{solvePlan}
+            </if>
+            <if test="solveDate != null">
+                and solve_date = #{solveDate}
+            </if>
+            <if test="confirm != null">
+                and confirm = #{confirm}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="faultId" useGeneratedKeys="true">
+        insert into db_lms.work_order(fault_description, fault_lift, check_in_man, check_in_phone, fault_date, register_man, solve_man, is_solve, fault_reason, solve_plan, solve_date, confirm)
+        values (#{faultDescription}, #{faultLift}, #{checkInMan}, #{checkInPhone}, #{faultDate}, #{registerMan}, #{solveMan}, #{isSolve}, #{faultReason}, #{solvePlan}, #{solveDate}, #{confirm})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.work_order
+        <set>
+            <if test="faultDescription != null and faultDescription != ''">
+                fault_description = #{faultDescription},
+            </if>
+            <if test="faultLift != null and faultLift != ''">
+                fault_lift = #{faultLift},
+            </if>
+            <if test="checkInMan != null and checkInMan != ''">
+                check_in_man = #{checkInMan},
+            </if>
+            <if test="checkInPhone != null and checkInPhone != ''">
+                check_in_phone = #{checkInPhone},
+            </if>
+            <if test="faultDate != null">
+                fault_date = #{faultDate},
+            </if>
+            <if test="registerMan != null and registerMan != ''">
+                register_man = #{registerMan},
+            </if>
+            <if test="solveMan != null and solveMan != ''">
+                solve_man = #{solveMan},
+            </if>
+            <if test="isSolve != null">
+                is_solve = #{isSolve},
+            </if>
+            <if test="faultReason != null and faultReason != ''">
+                fault_reason = #{faultReason},
+            </if>
+            <if test="solvePlan != null and solvePlan != ''">
+                solve_plan = #{solvePlan},
+            </if>
+            <if test="solveDate != null">
+                solve_date = #{solveDate},
+            </if>
+            <if test="confirm != null">
+                confirm = #{confirm},
+            </if>
+        </set>
+        where fault_id = #{faultId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_lms.work_order where fault_id = #{faultId}
+    </delete>
+
+</mapper>

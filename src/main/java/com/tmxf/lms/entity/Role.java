@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 角色表(Role)实体类
  *
  * @author makejava
- * @since 2020-03-31 22:46:27
+ * @since 2020 -03-31 22:46:27
  */
 @Getter
 @Setter
@@ -22,10 +22,6 @@ public class Role implements Serializable {
      */
     private Integer roleId;
     /**
-     * 角色编号
-     */
-    private Integer roleNum;
-    /**
      * 角色名称
      */
     private String roleName;
@@ -33,18 +29,6 @@ public class Role implements Serializable {
      * 角色描述
      */
     private String roleDesc;
-    /**
-     * 角色状态
-     */
-    private Object roleStatus;
-    /**
-     * 创建时间
-     */
-    private Date roleCreateTime;
-    /**
-     * 更新时间
-     */
-    private Date roleUpdateTime;
 
     @Override
     public String toString() {

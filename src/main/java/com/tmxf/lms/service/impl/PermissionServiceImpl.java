@@ -10,19 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The type Permission service.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/4 - 16:37
+ * @date 2020 /4/4 - 16:37
  * @package_name com.tmxf.lms.service.Impl
  */
 @Service
 public class PermissionServiceImpl implements PermissionService {
     @Resource
     private PermissionMapper permissionMapper;
-
-    @Override
-    public List<Permission> findByUserNum(Integer userNum) {
-        return null;
-    }
 
     @Override
     public List<Permission> findNavTree(Integer userNum, Integer pType) {

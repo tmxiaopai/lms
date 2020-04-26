@@ -8,8 +8,10 @@ import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 /**
+ * The type Druid data source properties.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/2 - 16:03
+ * @date 2020 /4/2 - 16:03
  * @package_name com.tmxf.lms.config
  */
 @Setter

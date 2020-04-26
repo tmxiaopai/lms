@@ -4,31 +4,31 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
+import java.util.Date;
 
 /**
- * 出入库记录表(StockInOut)实体类
+ * The type Stock in out.
  *
- * @author makejava
- * @since 2020-03-31 22:46:27
+ * @author TMXIAOPAI
  */
 @Getter
 @Setter
-public class StockInOut implements Serializable {
-    private static final long serialVersionUID = -31573436277235396L;
-    /**
-     * 记录ID
-     */
+public class StockInOut {
     private Integer sioId;
 
+    private String sioUser;
 
-    public Integer getSioId() {
-        return sioId;
-    }
+    private Date sioDate;
 
-    public void setSioId(Integer sioId) {
-        this.sioId = sioId;
-    }
+    private Short sioType;
+
+    private String stockNum;
+
+    private Integer sioCount;
+
+    private String sioReason;
+
+    private String sioGoMan;
 
     @Override
     public String toString() {

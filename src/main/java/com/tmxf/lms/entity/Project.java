@@ -8,63 +8,87 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * 项目表(Project)实体类
+ * 项目(Project)实体类
  *
  * @author makejava
- * @since 2020-03-31 22:46:27
+ * @since 2020 -04-14 19:33:21
  */
 @Getter
 @Setter
 public class Project implements Serializable {
-    private static final long serialVersionUID = 512868487602047658L;
+    private static final long serialVersionUID = -30196765906626506L;
     /**
-     * 项目编号
-     */
+    * 项目编号
+    */
     private String projectNum;
     /**
-     * 项目名称
-     */
+    * 项目名称
+    */
     private String projectName;
     /**
-     * 项目类型
-     */
-    private String projectType;
+    * 客户名称
+    */
+    private String customerName;
     /**
-     * 安装地址
-     */
-    private String projectAddr;
+    * 客户负责人
+    */
+    private String customerMan;
     /**
-     * 所属客户
-     */
-    private Integer customerNum;
+    * 联系方式
+    */
+    private String customerContact;
     /**
-     * 合作意向
-     */
-    private String projectCoopIn;
+    * 职务
+    */
+    private String customerJob;
     /**
-     * 需求台数
-     */
-    private Integer projectNeedCount;
-    /**
-     * 项目备注
-     */
-    private String projectDesc;
-    /**
-     * 销售人员
-     */
-    private Integer projectSaleman;
-    /**
-     * 项目登记时间
-     */
+    * 登记日期
+    */
     private Date projectDesignDate;
     /**
-     * 项目删除状态
-     */
-    private boolean projectStatus;
-
+    * 项目地址
+    */
+    private String projectAddress;
     /**
-     * @return 项目字符串信息
-     */
+    * 合作意向
+    */
+    private String projectIntention;
+    /**
+    * 项目类型
+    */
+    private String projectType;
+    /**
+    * 需求数量
+    */
+    private Integer needCount;
+    /**
+    * 开户行
+    */
+    private String bank;
+    /**
+    * 开户名
+    */
+    private String bankName;
+    /**
+    * 卡号
+    */
+    private String card;
+    /**
+    * 项目状态
+    */
+    private String projectStatus;
+    /**
+    * 销售人员
+    */
+    private String salesman;
+    /**
+    * 邮箱
+    */
+    private String customerEmail;
+    /**
+    * 备注
+    */
+    private String pDescription;
 
     @Override
     public String toString() {

@@ -7,8 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Page request.
+ *
  * @author TMXIAOPAI
- * @date 2020/3/31 - 10:15
+ * @date 2020 /3/31 - 10:15
  * @package_name com.tmxf.lms.page
  */
 @Getter
@@ -18,6 +20,12 @@ public class PageRequest {
     private int pageSize = 10;
     private Map<String, Object> params = new HashMap<>();
 
+    /**
+     * Gets param.
+     *
+     * @param key the key
+     * @return the param
+     */
     public Object getParam(String key) {
         return getParams().get(key);
     }

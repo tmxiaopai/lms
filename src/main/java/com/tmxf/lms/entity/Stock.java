@@ -1,34 +1,32 @@
 package com.tmxf.lms.entity;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
- * 库存表(Stock)实体类
+ * The type Stock.
  *
- * @author makejava
- * @since 2020-03-31 22:46:27
+ * @author TMXIAOPAI
  */
-@Getter
 @Setter
-public class Stock implements Serializable {
-    private static final long serialVersionUID = -50454831164763622L;
+@Getter
+public class Stock {
+    private String sName;
 
-    private Integer stockId;
-    /**
-     * 工具名称
-     */
-    private String stockName;
-    /**
-     * 数量
-     */
-    private Integer stockCount;
+    private String sType;
 
-    @Override
-    public String toString() {
-        return JSONObject.toJSONString(this);
-    }
+    private Integer sCount;
+
+    private String sNum;
+
+    private String sSpece;
+
+    private BigDecimal sUnitPrice;
+
+    private Integer sIn;
+
+    private Integer sOut;
+
 }

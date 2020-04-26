@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.ProjectMapper">
+
+    <resultMap type="com.tmxf.lms.entity.Project" id="ProjectMap">
+        <result property="projectNum" column="project_num" jdbcType="VARCHAR"/>
+        <result property="projectName" column="project_name" jdbcType="VARCHAR"/>
+        <result property="customerName" column="customer_name" jdbcType="VARCHAR"/>
+        <result property="customerMan" column="customer_man" jdbcType="VARCHAR"/>
+        <result property="customerContact" column="customer_contact" jdbcType="VARCHAR"/>
+        <result property="customerJob" column="customer_job" jdbcType="VARCHAR"/>
+        <result property="projectDesignDate" column="project_design_date" jdbcType="TIMESTAMP"/>
+        <result property="projectAddress" column="project_address" jdbcType="VARCHAR"/>
+        <result property="projectIntention" column="project_intention" jdbcType="VARCHAR"/>
+        <result property="projectType" column="project_type" jdbcType="VARCHAR"/>
+        <result property="needCount" column="need_count" jdbcType="INTEGER"/>
+        <result property="bank" column="bank" jdbcType="VARCHAR"/>
+        <result property="bankName" column="bank_name" jdbcType="VARCHAR"/>
+        <result property="card" column="card" jdbcType="VARCHAR"/>
+        <result property="projectStatus" column="project_status" jdbcType="VARCHAR"/>
+        <result property="salesman" column="salesman" jdbcType="VARCHAR"/>
+        <result property="customerEmail" column="customer_email" jdbcType="VARCHAR"/>
+        <result property="pDescription" column="p_description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ProjectMap">
+        select
+          project_num, project_name, customer_name, customer_man, customer_contact, customer_job, project_design_date, project_address, project_intention, project_type, need_count, bank, bank_name, card, project_status, salesman, customer_email, p_description
+        from db_lms.project
+        where project_num = #{projectNum}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ProjectMap">
+        select
+          project_num, project_name, customer_name, customer_man, customer_contact, customer_job, project_design_date, project_address, project_intention, project_type, need_count, bank, bank_name, card, project_status, salesman, customer_email, p_description
+        from db_lms.project
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="queryAll" resultMap="ProjectMap">
+        select
+            project_num, project_name, customer_name, customer_man, customer_contact, customer_job, project_design_date, project_address, project_intention, project_type, need_count, bank, bank_name, card, project_status, salesman, customer_email, p_description
+        from db_lms.project
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAllByProject" resultMap="ProjectMap">
+        select
+          project_num, project_name, customer_name, customer_man, customer_contact, customer_job, project_design_date, project_address, project_intention, project_type, need_count, bank, bank_name, card, project_status, salesman, customer_email, p_description
+        from db_lms.project
+        <where>
+            <if test="projectNum != null and projectNum != ''">
+                and project_num = #{projectNum}
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and project_name like '%${projectName}%'
+            </if>
+            <if test="customerName != null and customerName != ''">
+                and customer_name like '%${customerName}%'
+            </if>
+            <if test="customerMan != null and customerMan != ''">
+                and customer_man = #{customerMan}
+            </if>
+            <if test="customerContact != null and customerContact != ''">
+                and customer_contact = #{customerContact}
+            </if>
+            <if test="customerJob != null and customerJob != ''">
+                and customer_job = #{customerJob}
+            </if>
+            <if test="projectDesignDate != null">
+                and project_design_date = #{projectDesignDate}
+            </if>
+            <if test="projectAddress != null and projectAddress != ''">
+                and project_address = #{projectAddress}
+            </if>
+            <if test="projectIntention != null and projectIntention != ''">
+                and project_intention = #{projectIntention}
+            </if>
+            <if test="projectType != null and projectType != ''">
+                and project_type = #{projectType}
+            </if>
+            <if test="needCount != null">
+                and need_count = #{needCount}
+            </if>
+            <if test="bank != null and bank != ''">
+                and bank = #{bank}
+            </if>
+            <if test="bankName != null and bankName != ''">
+                and bank_name = #{bankName}
+            </if>
+            <if test="card != null and card != ''">
+                and card = #{card}
+            </if>
+            <if test="projectStatus != null and projectStatus != ''">
+                and project_status = #{projectStatus}
+            </if>
+            <if test="salesman != null and salesman != ''">
+                and salesman = #{salesman}
+            </if>
+            <if test="customerEmail != null and customerEmail != ''">
+                and customer_email = #{customerEmail}
+            </if>
+            <if test="pDescription != null and pDescription != ''">
+                and p_description = #{pDescription}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into db_lms.project(project_num,project_name, customer_name, customer_man, customer_contact, customer_job, project_design_date, project_address, project_intention, project_type, need_count, bank, bank_name, card, project_status, salesman, customer_email, p_description)
+        values (#{projectNum},#{projectName}, #{customerName}, #{customerMan}, #{customerContact}, #{customerJob}, #{projectDesignDate}, #{projectAddress}, #{projectIntention}, #{projectType}, #{needCount}, #{bank}, #{bankName}, #{card}, #{projectStatus}, #{salesman}, #{customerEmail}, #{pDescription})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.project
+        <set>
+            <if test="projectName != null and projectName != ''">
+                project_name = #{projectName},
+            </if>
+            <if test="customerName != null and customerName != ''">
+                customer_name = #{customerName},
+            </if>
+            <if test="customerMan != null and customerMan != ''">
+                customer_man = #{customerMan},
+            </if>
+            <if test="customerContact != null and customerContact != ''">
+                customer_contact = #{customerContact},
+            </if>
+            <if test="customerJob != null and customerJob != ''">
+                customer_job = #{customerJob},
+            </if>
+            <if test="projectDesignDate != null">
+                project_design_date = #{projectDesignDate},
+            </if>
+            <if test="projectAddress != null and projectAddress != ''">
+                project_address = #{projectAddress},
+            </if>
+            <if test="projectIntention != null and projectIntention != ''">
+                project_intention = #{projectIntention},
+            </if>
+            <if test="projectType != null and projectType != ''">
+                project_type = #{projectType},
+            </if>
+            <if test="needCount != null">
+                need_count = #{needCount},
+            </if>
+            <if test="bank != null and bank != ''">
+                bank = #{bank},
+            </if>
+            <if test="bankName != null and bankName != ''">
+                bank_name = #{bankName},
+            </if>
+            <if test="card != null and card != ''">
+                card = #{card},
+            </if>
+            <if test="projectStatus != null and projectStatus != ''">
+                project_status = #{projectStatus},
+            </if>
+            <if test="salesman != null and salesman != ''">
+                salesman = #{salesman},
+            </if>
+            <if test="customerEmail != null and customerEmail != ''">
+                customer_email = #{customerEmail},
+            </if>
+            <if test="pDescription != null and pDescription != ''">
+                p_description = #{pDescription},
+            </if>
+        </set>
+        where project_num = #{projectNum}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_lms.project where project_num = #{projectNum}
+    </delete>
+
+</mapper>

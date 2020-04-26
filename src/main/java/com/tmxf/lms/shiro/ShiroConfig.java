@@ -13,12 +13,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * The type Shiro config.
+ *
  * @author TMXIAOPAI
- * @date 2020/3/19 - 13:30
+ * @date 2020 /3/19 - 13:30
  * @package_name com.tmxf.shiro
  */
 @Configuration
 public class ShiroConfig {
+    /**
+     * Gets shiro filter factory bean.
+     *
+     * @param defaultWebSecurityManager the default web security manager
+     * @return the shiro filter factory bean
+     */
     @Bean
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager")DefaultWebSecurityManager defaultWebSecurityManager){
         //定义返回对象
@@ -37,6 +45,12 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+    /**
+     * Gets default web security manager.
+     *
+     * @param userRealm the user realm
+     * @return the default web security manager
+     */
     @Bean(name="securityManager")
     public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm){
         DefaultWebSecurityManager defaultWebSecurityManager=new DefaultWebSecurityManager();
@@ -44,11 +58,21 @@ public class ShiroConfig {
         return defaultWebSecurityManager;
     }
 
+    /**
+     * Get realm user realm.
+     *
+     * @return the user realm
+     */
     @Bean(name = "userRealm")
     public UserRealm getRealm(){
         return new UserRealm();
     }
 
+    /**
+     * Get shiro dialect shiro dialect.
+     *
+     * @return the shiro dialect
+     */
     public ShiroDialect getShiroDialect(){
         return new ShiroDialect();
     }

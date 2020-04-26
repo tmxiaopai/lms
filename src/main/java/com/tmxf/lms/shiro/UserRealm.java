@@ -21,11 +21,16 @@ import javax.servlet.http.HttpSessionContext;
 import java.util.Enumeration;
 
 /**
+ * The type User realm.
+ *
  * @author TMXIAOPAI
- * @date 2020/3/19 - 13:32
+ * @date 2020 /3/19 - 13:32
  * @package_name com.tmxf.shiro
  */
 public class UserRealm extends AuthorizingRealm {
+    /**
+     * The Logger.
+     */
     Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private UserService userService;

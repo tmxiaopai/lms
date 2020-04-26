@@ -11,8 +11,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * The type About role service.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/9 - 22:07
+ * @date 2020 /4/9 - 22:07
  * @package_name com.tmxf.lms.service.impl
  */
 @Service
@@ -40,5 +42,10 @@ public class AboutRoleServiceImpl implements AboutRoleService {
     @Override
     public int deleteUserRole(Integer userId) {
         return userRoleMapper.deleteUserRole(userId);
+    }
+
+    @Override
+    public Integer findUserRole(Integer userId) {
+        return userRoleMapper.findUserRole(userId);
     }
 }

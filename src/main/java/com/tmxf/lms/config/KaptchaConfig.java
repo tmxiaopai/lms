@@ -8,12 +8,19 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 /**
+ * The type Kaptcha config.
+ *
  * @author TMXIAOPAI
- * @date 2020/3/31 - 0:03
+ * @date 2020 /3/31 - 0:03
  * @package_name com.tmxf.lms.config
  */
 @Configuration
 public class KaptchaConfig {
+    /**
+     * Producer default kaptcha.
+     *
+     * @return the default kaptcha
+     */
     @Bean
     public DefaultKaptcha producer() {
         Properties properties = new Properties();

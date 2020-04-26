@@ -1,72 +1,153 @@
 package com.tmxf.lms.entity;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
- * 维保合同(HtMaintenance)实体类
- *
- * @author makejava
- * @since 2020-03-31 22:46:26
+ * The type Ht maintenance.
+ * @author TMXIAOPAI
  */
-@Getter
-@Setter
-public class HtMaintenance implements Serializable {
-    private static final long serialVersionUID = -96938385060749847L;
-    /**
-     * 维保合同编号
-     */
+public class HtMaintenance {
     private String htMNum;
-    /**
-     * 所属项目
-     */
+
     private String pNum;
-    /**
-     * 使用单位
-     */
+
     private String htMCustomer;
-    /**
-     * 维保电梯数量
-     */
+
     private Integer htMLiftCount;
-    /**
-     * 合同总金额
-     */
-    private Object htMMoney;
-    /**
-     * 结算方式
-     */
-    private String htMPaydateStyle;
-    /**
-     * 支付方式
-     */
+
+    private BigDecimal htMMoney;
+
+    private String htMPayDateStyle;
+
     private String htMPayStyle;
-    /**
-     * 保养类型
-     */
+
     private String htMStyle;
-    /**
-     * 合同生效期
-     */
-    private Object htMStartdate;
-    /**
-     * 合同结束期
-     */
-    private Object htMEnddate;
-    /**
-     * 合同签订日期
-     */
-    private Object htMSignDate;
-    /**
-     * 合同备注
-     */
+
+    private Date htMStartDate;
+
+    private Date htMEndDate;
+
+    private Date htMSignDate;
+
     private String htMDesc;
 
-    @Override
-    public String toString() {
-        return JSONObject.toJSONString(this);
+    private Short htMStatus;
+
+    private Integer htMMonth;
+
+    public void setHtMNum(String htMNum) {
+        this.htMNum = htMNum;
+    }
+
+    public void setpNum(String pNum) {
+        this.pNum = pNum;
+    }
+
+    public void setHtMCustomer(String htMCustomer) {
+        this.htMCustomer = htMCustomer;
+    }
+
+    public void setHtMLiftCount(Integer htMLiftCount) {
+        this.htMLiftCount = htMLiftCount;
+    }
+
+    public void setHtMMoney(BigDecimal htMMoney) {
+        this.htMMoney = htMMoney;
+    }
+
+    public void setHtMPayDateStyle(String htMPayDateStyle) {
+        this.htMPayDateStyle = htMPayDateStyle;
+    }
+
+    public void setHtMPayStyle(String htMPayStyle) {
+        this.htMPayStyle = htMPayStyle;
+    }
+
+    public void setHtMStyle(String htMStyle) {
+        this.htMStyle = htMStyle;
+    }
+
+    public void setHtMStartDate(Date htMStartDate) {
+        this.htMStartDate = htMStartDate;
+    }
+
+    public void setHtMEndDate(Date htMEndDate) {
+        this.htMEndDate = htMEndDate;
+    }
+
+    public void setHtMSignDate(Date htMSignDate) {
+        this.htMSignDate = htMSignDate;
+    }
+
+    public void setHtMDesc(String htMDesc) {
+        this.htMDesc = htMDesc;
+    }
+
+    public void setHtMStatus(Short htMStatus) {
+        this.htMStatus = htMStatus;
+    }
+
+    public void setHtMMonth(Integer htMMonth) {
+        this.htMMonth = htMMonth;
+    }
+
+    public String getHtMNum() {
+        return htMNum;
+    }
+
+    public String getpNum() {
+        return pNum;
+    }
+
+    public String getHtMCustomer() {
+        return htMCustomer;
+    }
+
+    public Integer getHtMLiftCount() {
+        return htMLiftCount;
+    }
+
+    public BigDecimal getHtMMoney() {
+        return htMMoney;
+    }
+
+    public String getHtMPayDateStyle() {
+        return htMPayDateStyle;
+    }
+
+    public String getHtMPayStyle() {
+        return htMPayStyle;
+    }
+
+    public String getHtMStyle() {
+        return htMStyle;
+    }
+
+    public Date getHtMStartDate() {
+        return htMStartDate;
+    }
+
+    public Date getHtMEndDate() {
+        return htMEndDate;
+    }
+
+    public Date getHtMSignDate() {
+        return htMSignDate;
+    }
+
+    public String getHtMDesc() {
+        return htMDesc;
+    }
+
+    public Short getHtMStatus() {
+        return htMStatus;
+    }
+
+    public Integer getHtMMonth() {
+        return htMMonth;
     }
 }

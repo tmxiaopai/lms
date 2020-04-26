@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.StockInOutMapper">
+
+    <resultMap type="com.tmxf.lms.entity.StockInOut" id="StockInOutMap">
+        <result property="sioId" column="sio_id" jdbcType="INTEGER"/>
+        <result property="sioUser" column="sio_user" jdbcType="VARCHAR"/>
+        <result property="sioDate" column="sio_date" jdbcType="TIMESTAMP"/>
+        <result property="sioType" column="sio_type" jdbcType="OTHER"/>
+        <result property="stockNum" column="stock_num" jdbcType="VARCHAR"/>
+        <result property="sioCount" column="sio_count" jdbcType="INTEGER"/>
+        <result property="sioReason" column="sio_reason" jdbcType="VARCHAR"/>
+        <result property="sioGoMan" column="sio_go_man" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StockInOutMap">
+        select sio_id,
+               sio_user,
+               sio_date,
+               sio_type,
+               stock_num,
+               sio_count,
+               sio_reason,
+               sio_go_man
+        from db_lms.stock_in_out
+        where sio_id = #{sioId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StockInOutMap">
+        select sio_id,
+               sio_user,
+               sio_date,
+               sio_type,
+               stock_num,
+               sio_count,
+               sio_reason,
+               sio_go_man
+        from db_lms.stock_in_out
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StockInOutMap">
+        select
+        sio_id, sio_user, sio_date, sio_type, stock_num, sio_count, sio_reason,sio_go_man
+        from db_lms.stock_in_out
+        <where>
+            <if test="sioId != null">
+                and sio_id = #{sioId}
+            </if>
+            <if test="sioUser != null and sioUser != ''">
+                and sio_user = #{sioUser}
+            </if>
+            <if test="sioDate != null">
+                and sio_date = #{sioDate}
+            </if>
+            <if test="sioType != null">
+                and sio_type = #{sioType}
+            </if>
+            <if test="stockNum != null and stockNum != ''">
+                and stock_num = #{stockNum}
+            </if>
+            <if test="sioCount != null">
+                and sio_count = #{sioCount}
+            </if>
+            <if test="sioReason != null and sioReason != ''">
+                and sio_reason = #{sioReason}
+            </if>
+            <if test="sioGoMAn != null and sioGoMan !=''">
+                and sio_go_man = #{sioGoMan}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="sioId" useGeneratedKeys="true">
+        insert into db_lms.stock_in_out(sio_user, sio_date, sio_type, stock_num, sio_count, sio_reason,sio_go_man)
+        values (#{sioUser}, #{sioDate}, #{sioType}, #{stockNum}, #{sioCount}, #{sioReason},#{sioGoMan})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.stock_in_out
+        <set>
+            <if test="sioUser != null and sioUser != ''">
+                sio_user = #{sioUser},
+            </if>
+            <if test="sioDate != null">
+                sio_date = #{sioDate},
+            </if>
+            <if test="sioType != null">
+                sio_type = #{sioType},
+            </if>
+            <if test="stockNum != null and stockNum != ''">
+                stock_num = #{stockNum},
+            </if>
+            <if test="sioCount != null">
+                sio_count = #{sioCount},
+            </if>
+            <if test="sioReason != null and sioReason != ''">
+                sio_reason = #{sioReason},
+            </if>
+            <if test="sioGoMAn != null and sioGoMan !=''">
+                sio_go_man = #{sioGoMan}
+            </if>
+        </set>
+        where sio_id = #{sioId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from db_lms.stock_in_out
+        where sio_id = #{sioId}
+    </delete>
+
+</mapper>

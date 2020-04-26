@@ -5,8 +5,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * The type Cors config.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/1 - 0:30
+ * @date 2020 /4/1 - 0:30
  * @package_name com.tmxf.lms.config
  */
 @Configuration

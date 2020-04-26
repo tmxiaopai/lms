@@ -6,8 +6,10 @@ import lombok.Setter;
 import java.util.List;
 
 /**
+ * The type Page result.
+ *
  * @author TMXIAOPAI
- * @date 2020/3/31 - 10:18
+ * @date 2020 /3/31 - 10:18
  * @package_name com.tmxf.lms.page
  */
 @Getter

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.QuotationMapper">
+
+    <resultMap type="com.tmxf.lms.entity.Quotation" id="QuotationMap">
+        <result property="qNum" column="q_num" jdbcType="VARCHAR"/>
+        <result property="qPrice" column="q_price" jdbcType="OTHER"/>
+        <result property="qDate" column="q_date" jdbcType="TIMESTAMP"/>
+        <result property="qStart" column="q_start" jdbcType="TIMESTAMP"/>
+        <result property="qEnd" column="q_end" jdbcType="TIMESTAMP"/>
+        <result property="qInstallDate" column="q_install_date" jdbcType="INTEGER"/>
+        <result property="qProject" column="q_project" jdbcType="VARCHAR"/>
+        <result property="qDescription" column="q_description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="QuotationMap">
+        select q_num,
+               q_price,
+               q_date,
+               q_start,
+               q_end,
+               q_install_date,
+               q_project,
+               q_description
+        from db_lms.quotation
+        where q_num = #{qNum}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="QuotationMap">
+        select q_num,
+               q_price,
+               q_date,
+               q_start,
+               q_end,
+               q_install_date,
+               q_project,
+               q_description
+        from db_lms.quotation
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="QuotationMap">
+        select
+        q_num, q_price, q_date, q_start, q_end, q_install_date, q_project, q_description
+        from db_lms.quotation
+        <where>
+            <if test="qNum != null and qNum != ''">
+                and q_num = #{qNum}
+            </if>
+            <if test="qPrice != null">
+                and q_price = #{qPrice}
+            </if>
+            <if test="qDate != null">
+                and q_date = #{qDate}
+            </if>
+            <if test="qStart != null">
+                and q_start = #{qStart}
+            </if>
+            <if test="qEnd != null">
+                and q_end = #{qEnd}
+            </if>
+            <if test="qInstallDate != null">
+                and q_install_date = #{qInstallDate}
+            </if>
+            <if test="qProject != null and qProject != ''">
+                and q_project = #{qProject}
+            </if>
+            <if test="qDescription != null and qDescription != ''">
+                and q_description = #{qDescription}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryByProNum">
+        select q_num,
+               q_price,
+               q_date,
+               q_start,
+               q_end,
+               q_install_date,
+               q_project,
+               q_description
+        from db_lms.quotation
+        where q_project = #{projectNum}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into db_lms.quotation(q_num, q_price, q_date, q_start, q_end, q_install_date, q_project, q_description)
+        values (#{qNum},#{qPrice}, #{qDate}, #{qStart}, #{qEnd}, #{qInstallDate}, #{qProject}, #{qDescription})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.quotation
+        <set>
+            <if test="qPrice != null">
+                q_price = #{qPrice},
+            </if>
+            <if test="qDate != null">
+                q_date = #{qDate},
+            </if>
+            <if test="qStart != null">
+                q_start = #{qStart},
+            </if>
+            <if test="qEnd != null">
+                q_end = #{qEnd},
+            </if>
+            <if test="qInstallDate != null">
+                q_install_date = #{qInstallDate},
+            </if>
+            <if test="qProject != null and qProject != ''">
+                q_project = #{qProject},
+            </if>
+            <if test="qDescription != null and qDescription != ''">
+                q_description = #{qDescription},
+            </if>
+        </set>
+        where q_num = #{qNum}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from db_lms.quotation
+        where q_num = #{qNum}
+    </delete>
+
+</mapper>

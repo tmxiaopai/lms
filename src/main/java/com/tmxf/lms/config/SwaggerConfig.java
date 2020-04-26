@@ -10,13 +10,20 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
+ * The type Swagger config.
+ *
  * @author TMXIAOPAI
- * @date 2020/3/30 - 22:49
+ * @date 2020 /3/30 - 22:49
  * @package_name com.tmxf.lms.config
  */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    /**
+     * Create rest api docket.
+     *
+     * @return the docket
+     */
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
     }

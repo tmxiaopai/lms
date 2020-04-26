@@ -12,16 +12,12 @@ import java.io.Serializable;
  * 用户表(User)实体类
  *
  * @author makejava
- * @since 2020-03-31 22:46:27
+ * @since 2020 -03-31 22:46:27
  */
 @Getter
 @Setter
 public class User implements Serializable {
     private static final long serialVersionUID = -60441373665699933L;
-    /**
-     * 用户ID
-     */
-    private Integer userId;
     /**
      * 用户编号
      */
@@ -34,10 +30,6 @@ public class User implements Serializable {
      * 用户密码
      */
     private String userPassword;
-    /**
-     * 加密盐值
-     */
-    private String userSalt;
     /**
      * 用户手机号
      */
@@ -55,13 +47,9 @@ public class User implements Serializable {
      */
     private Date userLastLoginTime;
     /**
-     * 最后更新时间
+     * 角色名称
      */
-    private Date userUpdateTime;
-    /**
-     * 用户状态
-     */
-    private Boolean userStatus;
+   private Integer roleName;
 
 
     @Override

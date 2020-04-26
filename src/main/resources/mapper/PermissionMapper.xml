@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.PermissionMapper">
+
+    <resultMap type="com.tmxf.lms.entity.Permission" id="PermissionMap">
+        <result property="permissionId" column="permission_id" jdbcType="INTEGER"/>
+        <result property="permissionName" column="permission_name" jdbcType="VARCHAR"/>
+        <result property="permissionIcon" column="permission_icon" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="permissionType" column="permission_type" jdbcType="INTEGER"/>
+        <result property="permissionUrl" column="permission_url" jdbcType="VARCHAR"/>
+        <result property="permissionOrderNum" column="permission_order_num" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="findByUserNum" resultMap="PermissionMap">
+        select p.permission_id,p.permission_name,p.permission_icon,p.parent_id,p.permission_type,p.permission_url,p.permission_order_num
+        from permission p,user u,user_role ur, role_permission rm
+            where u.user_num = #{userNum}
+              and u.user_num=ur.user_id
+              and ur.role_id = rm.role_id
+              and rm.permission_id = p.permission_id
+
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="PermissionMap">
+        select
+          permission_id, permission_name, permission_icon, parent_id, permission_type, permission_url, permission_order_num
+        from db_lms.permission
+        where permission_id = #{permissionId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="PermissionMap">
+        select
+          permission_id, permission_name, permission_icon, parent_id, permission_type, permission_url, permission_order_num
+        from db_lms.permission
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="PermissionMap">
+        select
+          permission_id, permission_name, permission_icon, parent_id, permission_type, permission_url, permission_order_num
+        from db_lms.permission
+        <where>
+            <if test="permissionId != null">
+                and permission_id = #{permissionId}
+            </if>
+            <if test="permissionName != null and permissionName != ''">
+                and permission_name = #{permissionName}
+            </if>
+            <if test="permissionIcon != null and permissionIcon != ''">
+                and permission_icon = #{permissionIcon}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="permissionType != null">
+                and permission_type = #{permissionType}
+            </if>
+            <if test="permissionUrl != null and permissionUrl != ''">
+                and permission_url = #{permissionUrl}
+            </if>
+            <if test="permissionOrderNum != null">
+                and permission_order_num = #{permissionOrderNum}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="permissionId" useGeneratedKeys="true">
+        insert into db_lms.permission(permission_name, permission_icon, parent_id, permission_type, permission_url, permission_order_num)
+        values (#{permissionName}, #{permissionIcon}, #{parentId}, #{permissionType}, #{permissionUrl}, #{permissionOrderNum})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.permission
+        <set>
+            <if test="permissionName != null and permissionName != ''">
+                permission_name = #{permissionName},
+            </if>
+            <if test="permissionIcon != null and permissionIcon != ''">
+                permission_icon = #{permissionIcon},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="permissionType != null">
+                permission_type = #{permissionType},
+            </if>
+            <if test="permissionUrl != null and permissionUrl != ''">
+                permission_url = #{permissionUrl},
+            </if>
+            <if test="permissionOrderNum != null">
+                permission_order_num = #{permissionOrderNum},
+            </if>
+        </set>
+        where permission_id = #{permissionId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_lms.permission where permission_id = #{permissionId}
+    </delete>
+
+</mapper>

@@ -8,8 +8,10 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
+ * The type Notice.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/8 - 23:07
+ * @date 2020 /4/8 - 23:07
  * @package_name com.tmxf.lms.entity
  */
 @Getter

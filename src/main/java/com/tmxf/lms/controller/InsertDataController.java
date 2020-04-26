@@ -1,12 +1,10 @@
 package com.tmxf.lms.controller;
 
 import com.tmxf.lms.bean.UserRoleForm;
-import com.tmxf.lms.entity.Customer;
 import com.tmxf.lms.entity.Notice;
 import com.tmxf.lms.entity.User;
 import com.tmxf.lms.entity.UserRole;
 import com.tmxf.lms.service.AboutRoleService;
-import com.tmxf.lms.service.CustomerService;
 import com.tmxf.lms.service.NoticeService;
 import com.tmxf.lms.service.UserService;
 import org.slf4j.Logger;
@@ -20,16 +18,20 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
+ * The type Insert data controller.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/8 - 21:48
+ * @date 2020 /4/8 - 21:48
  * @package_name com.tmxf.lms.controller
  */
 @RestController
 public class InsertDataController {
+    /**
+     * The Logger.
+     */
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Resource
-    private CustomerService customerService;
+
     @Resource
     private NoticeService noticeService;
     @Resource
@@ -37,25 +39,14 @@ public class InsertDataController {
     @Resource
     private AboutRoleService aboutRoleService;
 
-    /**
-     * 插入客户信息
-     *
-     * @param customer
-     * @return
-     */
-    @PostMapping("insertCustomer")
-    public Object insertCustomerInfo(@RequestBody Customer customer) {
-        logger.info("----------新增客户信息----------");
-        if (customer.getCustomerName() != null && customer.getCustomerType() != null) {
-            customerService.insertCustomerInfo(customer);
-            return "成功保存";
-        } else if (customer.getCustomerName() == null || "".equals(customer.getCustomerName())) {
-            return "客户名称为空";
-        } else {
-            return "输入数据无效";
-        }
-    }
 
+    /**
+     * Insert notice object.
+     *
+     * @param notice  the notice
+     * @param request the request
+     * @return the object
+     */
     @PostMapping("insertNotice")
     public Object insertNotice(@RequestBody Notice notice, HttpServletRequest request) {
         logger.info("----------新增公告信息----------");
@@ -72,12 +63,16 @@ public class InsertDataController {
         return "插入失败，请检查数据";
     }
 
+    /**
+     * Insert user object.
+     *
+     * @param user the user
+     * @return the object
+     */
     @PostMapping("insertUser")
     public Object insertUser(@RequestBody User user) {
         logger.info("----------新增用户信息----------");
         user.setUserCreateTime(new Date());
-        user.setUserUpdateTime(new Date());
-        user.setUserSalt(String.valueOf(user.getUserNum()));
         if (user.getUserNum() == null) {
             return "工号为空";
         } else if (user.getUserName() == null || user.getUserName().equals("")) {
@@ -85,12 +80,23 @@ public class InsertDataController {
         } else if (user.getUserPassword() == null || user.getUserPassword().equals("")) {
             return "密码为空";
         }
-        if (userService.insertUser(user) == 1) {
+        UserRole ur=new UserRole();
+        ur.setUserId(Integer.valueOf(user.getUserNum()));
+        ur.setRoleId(user.getRoleName());
+        user.setUserPassword(userService.encodingPassword(user.getUserPassword(),user.getUserNum()));
+        if (userService.insertUser(user) == 1 && aboutRoleService.insertUserRole(ur) ==1) {
             return "保存成功";
+        } else {
+            return "保存失败";
         }
-        return "保存失败";
     }
 
+    /**
+     * Insert user role object.
+     *
+     * @param userRoleForm the user role form
+     * @return the object
+     */
     @PostMapping("insertUserRole")
     public Object insertUserRole(@RequestBody UserRoleForm userRoleForm) {
         logger.info("----------新增用户角色信息----------");
@@ -98,7 +104,7 @@ public class InsertDataController {
         int userNum = userRoleForm.getUserNum();
         logger.info(roleId + " " + userNum);
         UserRole userRole = new UserRole();
-        userRole.setUserId(userService.findUserIdByUserNum(userNum));
+        userRole.setUserId(userNum);
         userRole.setRoleId(roleId);
         if (aboutRoleService.insertUserRole(userRole) == 1) {
             return "用户角色保存成功";

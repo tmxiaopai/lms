@@ -5,6 +5,7 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.tmxf.lms.bean.LoginForm;
 import com.tmxf.lms.entity.User;
+import com.tmxf.lms.service.AboutRoleService;
 import com.tmxf.lms.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,16 +25,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Sys login controller.
+ *
  * @author TMXIAOPAI
- * @date 2020/3/30 - 23:56
+ * @date 2020 /3/30 - 23:56
  * @package_name com.tmxf.lms.controller
  */
 @RestController
 public class SysLoginController {
+    /**
+     * The Logger.
+     */
     Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
     private Producer producer;
@@ -41,6 +48,16 @@ public class SysLoginController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private AboutRoleService aboutRoleService;
+
+    /**
+     * Captcha.
+     *
+     * @param response the response
+     * @param request  the request
+     * @throws IOException the io exception
+     */
     @GetMapping("captcha.jpg")
     public void captcha(HttpServletResponse response, HttpServletRequest request) throws IOException {
         logger.info("----------获取验证码----------");
@@ -55,11 +72,19 @@ public class SysLoginController {
         IOUtils.closeQuietly(outputStream);
     }
 
+    /**
+     * Do login object.
+     *
+     * @param loginForm the login form
+     * @param request   the request
+     * @return the object
+     */
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public Object doLogin(@RequestBody LoginForm loginForm, HttpServletRequest request) {
         logger.info("----------登录逻辑----------");
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(String.valueOf(loginForm.getUserNum()), loginForm.getPassword());
+        String password = userService.encodingPassword(loginForm.getPassword(), loginForm.getUserNum());
+        UsernamePasswordToken token = new UsernamePasswordToken(String.valueOf(loginForm.getUserNum()), password);
         logger.info("登录信息为:" + loginForm.toString());
         String captchaConfirm = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         Map<String, Object> map = new HashMap<>();
@@ -73,6 +98,7 @@ public class SysLoginController {
         }
         try {
             subject.login(token);
+            userService.updateLoginTime(loginForm.getUserNum());
         } catch (UnknownAccountException e) {
             map.put("msg", "该用户不存在");
             return map;
@@ -84,7 +110,11 @@ public class SysLoginController {
             return map;
         }
         User user = userService.findUserLoginInfoByUserNum(loginForm.getUserNum());
+        logger.info("登录时查询的用户信息为：" + user.toString());
         request.getSession().setAttribute("userName", user.getUserName());
+        request.getSession().setAttribute("userNum", user.getUserNum());
+        Integer role = aboutRoleService.findUserRole(user.getUserNum());
+        map.put("role", role);
         map.put("user", user);
         map.put("token", token);
         map.put("msg", "登录成功");
