@@ -81,4 +81,9 @@ public class HtMaintenanceServiceImpl implements HtMaintenanceService {
     public List<HtMaintenance> findAllMaHt() {
         return htMaintenanceDao.queryAll(null);
     }
+
+    @Override
+    public List<HtMaintenance> queryAll(HtMaintenance htMaintenance) {
+        return htMaintenanceDao.queryAll(htMaintenance);
+    }
 }

@@ -81,4 +81,10 @@ public class HtInstallServiceImpl implements HtInstallService {
     public List<HtInstall> findAllInstallHt() {
         return htInstallDao.queryAll(null);
     }
+
+    @Override
+    public List<HtInstall> queryAll(HtInstall htInstall) {
+        return htInstallDao.queryAll(htInstall);
+    }
+
 }

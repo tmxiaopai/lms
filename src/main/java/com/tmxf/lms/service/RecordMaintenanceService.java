@@ -9,11 +9,9 @@ import java.util.List;
  * 维保记录(RecordMaintenance)表服务接口
  *
  * @author makejava
- * @since 2020-04-22 19:03:45
+ * @since 2020-05-23 21:40:47
  */
 public interface RecordMaintenanceService {
-
-    List<RecordMaintenance> queryAll(RecordMaintenance recordMaintenance);
 
     /**
      * 通过ID查询单条数据
@@ -38,7 +36,7 @@ public interface RecordMaintenanceService {
      * @param recordMaintenance 实例对象
      * @return 实例对象
      */
-    int insert(RecordMaintenance recordMaintenance);
+    RecordMaintenance insert(RecordMaintenance recordMaintenance);
 
     /**
      * 修改数据
@@ -55,14 +53,6 @@ public interface RecordMaintenanceService {
      * @return 是否成功
      */
     boolean deleteById(Integer rmId);
-
-    /**
-     * 批量插入
-     * @param liftNum
-     * @param mDate
-     * @param count
-     * @return
-     */
-    void insertMany(Integer liftNum, Date mDate, int count);
+    public void insertMany(Integer liftNum, Date mDate, int count);
 
 }

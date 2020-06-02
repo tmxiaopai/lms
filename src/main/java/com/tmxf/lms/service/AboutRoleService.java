@@ -16,7 +16,7 @@ public interface AboutRoleService {
     /**
      * 查找所有角色信息
      *
-     * @return list
+     * @return list list
      */
     List<Role> findAllRole();
 
@@ -24,7 +24,7 @@ public interface AboutRoleService {
      * 通过用户ID更新用户角色表
      *
      * @param userRole the user role
-     * @return int
+     * @return int int
      */
     int updateUserRoleByUserId(UserRole userRole);
 
@@ -32,7 +32,7 @@ public interface AboutRoleService {
      * 添加用户角色记录
      *
      * @param userRole the user role
-     * @return int
+     * @return int int
      */
     int insertUserRole(UserRole userRole);
 

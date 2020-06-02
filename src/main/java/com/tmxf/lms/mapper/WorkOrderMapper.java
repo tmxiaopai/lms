@@ -64,7 +64,7 @@ public interface WorkOrderMapper {
      * 更新客户确认状态
      *
      * @param faultId the fault id
-     * @return int
+     * @return int int
      */
     @Update({
             "update work_order set confirm = 1 where fault_id=#{faultId}"

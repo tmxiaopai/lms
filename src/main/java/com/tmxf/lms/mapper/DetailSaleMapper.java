@@ -10,14 +10,28 @@ import org.apache.ibatis.type.JdbcType;
 
 /**
  * The interface Detail sale mapper.
+ *
  * @author TMXIAOPAI
  */
 public interface DetailSaleMapper {
+    /**
+     * Ok money int.
+     *
+     * @param num the num
+     * @param d   the d
+     * @return the int
+     */
     @Update({
             "update detail_sale set detail_sale_state_money = 1,detail_sale_ok_date=#{d} where detail_sale_num =#{num}"
     })
     int okMoney(String num, Date d);
 
+    /**
+     * Invoice int.
+     *
+     * @param num the num
+     * @return the int
+     */
     @Update({
             "update detail_sale set detail_sale_state_invoice = 1 where detail_sale_num =#{num} "
     })
@@ -28,10 +42,9 @@ public interface DetailSaleMapper {
      * 新增数据
      *
      * @param detailSale 实例对象
-     * @return 影响行数
+     * @return 影响行数 int
      */
     int insert(DetailSale detailSale);
-
 
 
     /**
@@ -64,6 +77,11 @@ public interface DetailSaleMapper {
     })
     List<DetailSale> selectAllUn();
 
+    /**
+     * Select all ok list.
+     *
+     * @return the list
+     */
     @Select({
             "select",
             "detail_sale_num, detail_sale_user, detail_sale_date, detail_sale_money, detail_sale_project, ",
@@ -93,7 +111,7 @@ public interface DetailSaleMapper {
      * 通过ID查询单条数据
      *
      * @param detailSaleNum 主键
-     * @return 实例对象
+     * @return 实例对象 detail sale
      */
     DetailSale queryById(String detailSaleNum);
 
@@ -101,8 +119,8 @@ public interface DetailSaleMapper {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
+     * @param limit  查询条数
+     * @return 对象列表 list
      */
     List<DetailSale> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
@@ -111,17 +129,16 @@ public interface DetailSaleMapper {
      * 通过实体作为筛选条件查询
      *
      * @param detailSale 实例对象
-     * @return 对象列表
+     * @return 对象列表 list
      */
     List<DetailSale> queryAll(DetailSale detailSale);
-
 
 
     /**
      * 修改数据
      *
      * @param detailSale 实例对象
-     * @return 影响行数
+     * @return 影响行数 int
      */
     int update(DetailSale detailSale);
 
@@ -129,7 +146,7 @@ public interface DetailSaleMapper {
      * 通过主键删除数据
      *
      * @param detailSaleNum 主键
-     * @return 影响行数
+     * @return 影响行数 int
      */
     int deleteById(String detailSaleNum);
 }

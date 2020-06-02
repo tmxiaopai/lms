@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.StockMapper">
+
+    <resultMap type="com.tmxf.lms.entity.Stock" id="StockMap">
+        <result property="sName" column="s_name" jdbcType="VARCHAR"/>
+        <result property="sType" column="s_type" jdbcType="VARCHAR"/>
+        <result property="sCount" column="s_count" jdbcType="INTEGER"/>
+        <result property="sNum" column="s_num" jdbcType="VARCHAR"/>
+        <result property="sSpece" column="s_spece" jdbcType="VARCHAR"/>
+        <result property="sUnitPrice" column="s_unit_price" jdbcType="OTHER"/>
+        <result property="sIn" column="s_in" jdbcType="INTEGER"/>
+        <result property="sOut" column="s_out" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StockMap">
+        select
+          s_name, s_type, s_count, s_num, s_spece, s_unit_price, s_in, s_out
+        from db_lms.stock
+        where s_name = #{sName}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StockMap">
+        select
+          s_name, s_type, s_count, s_num, s_spece, s_unit_price, s_in, s_out
+        from db_lms.stock
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StockMap">
+        select
+          s_name, s_type, s_count, s_num, s_spece, s_unit_price, s_in, s_out
+        from db_lms.stock
+        <where>
+            <if test="sName != null and sName != ''">
+                and s_name = #{sName}
+            </if>
+            <if test="sType != null and sType != ''">
+                and s_type = #{sType}
+            </if>
+            <if test="sCount != null">
+                and s_count = #{sCount}
+            </if>
+            <if test="sNum != null and sNum != ''">
+                and s_num = #{sNum}
+            </if>
+            <if test="sSpece != null and sSpece != ''">
+                and s_spece = #{sSpece}
+            </if>
+            <if test="sUnitPrice != null">
+                and s_unit_price = #{sUnitPrice}
+            </if>
+            <if test="sIn != null">
+                and s_in = #{sIn}
+            </if>
+            <if test="sOut != null">
+                and s_out = #{sOut}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="sName" useGeneratedKeys="true">
+        insert into db_lms.stock(s_type, s_count, s_num, s_spece, s_unit_price, s_in, s_out)
+        values (#{sType}, #{sCount}, #{sNum}, #{sSpece}, #{sUnitPrice}, #{sIn}, #{sOut})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.stock
+        <set>
+            <if test="sType != null and sType != ''">
+                s_type = #{sType},
+            </if>
+            <if test="sCount != null">
+                s_count = #{sCount},
+            </if>
+            <if test="sNum != null and sNum != ''">
+                s_num = #{sNum},
+            </if>
+            <if test="sSpece != null and sSpece != ''">
+                s_spece = #{sSpece},
+            </if>
+            <if test="sUnitPrice != null">
+                s_unit_price = #{sUnitPrice},
+            </if>
+            <if test="sIn != null">
+                s_in = #{sIn},
+            </if>
+            <if test="sOut != null">
+                s_out = #{sOut},
+            </if>
+        </set>
+        where s_name = #{sName}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_lms.stock where s_name = #{sName}
+    </delete>
+
+</mapper>

@@ -110,6 +110,12 @@ public class ProjectController {
         return projectService.findAllProjectName();
     }
 
+    /**
+     * Search project string.
+     *
+     * @param project the project
+     * @return the string
+     */
     @PostMapping("searchProject")
     public String searchProject(@RequestBody Project project){
         return JSONObject.toJSONString(projectService.queryAllByProject(project));

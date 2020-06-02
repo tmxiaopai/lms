@@ -1,6 +1,5 @@
 package com.tmxf.lms.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -8,16 +7,16 @@ import java.io.Serializable;
  * 报价书(Quotation)实体类
  *
  * @author makejava
- * @since 2020-04-24 16:06:50
+ * @since 2020-05-25 03:32:50
  */
 public class Quotation implements Serializable {
-    private static final long serialVersionUID = -92373899508123024L;
+    private static final long serialVersionUID = 377016147923968110L;
     /**
     * 报价书编号
     */
     private String qNum;
     
-    private BigDecimal qPrice;
+    private Double qPrice;
     /**
     * 报价书登记日期
     */
@@ -48,11 +47,11 @@ public class Quotation implements Serializable {
         this.qNum = qNum;
     }
 
-    public BigDecimal getQPrice() {
+    public Double getQPrice() {
         return qPrice;
     }
 
-    public void setQPrice(BigDecimal qPrice) {
+    public void setQPrice(Double qPrice) {
         this.qPrice = qPrice;
     }
 

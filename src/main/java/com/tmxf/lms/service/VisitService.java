@@ -55,8 +55,9 @@ public interface VisitService {
     /**
      * 查询所有计划
      *
-     * @return list
+     * @return list list
      */
     List<Visit> findAllPlan();
+    List<Visit> queryAll(Visit visit);
 
 }

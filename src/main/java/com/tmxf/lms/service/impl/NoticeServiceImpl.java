@@ -39,4 +39,9 @@ public class NoticeServiceImpl implements NoticeService {
     public int deleteByNoticeID(Integer noticeId) {
         return noticeMapper.deleteByNoticeId(noticeId);
     }
+
+    @Override
+    public List<Notice> findNoticeByContent(String content) {
+        return noticeMapper.findNoticeByContent(content);
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * (Userinfo)表服务实现类
  *
  * @author makejava
- * @since 2020-04-22 14:56:02
+ * @since 2020 -04-22 14:56:02
  */
 @Service("userinfoService")
 public class UserinfoServiceImpl implements UserinfoService {

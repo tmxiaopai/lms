@@ -17,15 +17,22 @@ public interface NoticeService {
     /**
      * 查找所有公告
      *
-     * @return list
+     * @return list list
      */
     List<Notice> findAllNotice();
+
+    /**
+     * Find w notice list.
+     *
+     * @return the list
+     */
     List<Notice> findWNotice();
+
     /**
      * 插入公告数据
      *
      * @param notice the notice
-     * @return int
+     * @return int int
      */
     int insertNotice(Notice notice);
 
@@ -33,7 +40,8 @@ public interface NoticeService {
      * 通过公告ID删除公告
      *
      * @param noticeId the notice id
-     * @return int
+     * @return int int
      */
     int deleteByNoticeID(Integer noticeId);
+    List<Notice> findNoticeByContent(String content);
 }

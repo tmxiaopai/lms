@@ -1,5 +1,6 @@
 package com.tmxf.lms.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.tmxf.lms.entity.WorkOrder;
 import com.tmxf.lms.service.WorkOrderService;
 import org.slf4j.Logger;
@@ -57,5 +58,10 @@ public class WorkOrderController {
     @PostMapping("setConfirm")
     public Object setConfirm(@RequestBody Integer faultId){
         return workOrderService.updateConfirm(faultId);
+    }
+
+    @PostMapping("searchWOByE")
+    public String searchWOByE(@RequestBody WorkOrder workOrder){
+        return JSONObject.toJSONString(workOrderService.queryByE(workOrder));
     }
 }

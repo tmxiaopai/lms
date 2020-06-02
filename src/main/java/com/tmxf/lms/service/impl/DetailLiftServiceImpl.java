@@ -12,7 +12,7 @@ import java.util.List;
  * 电梯需求(DetailLift)表服务实现类
  *
  * @author makejava
- * @since 2020-04-21 14:54:43
+ * @since 2020 -04-21 14:54:43
  */
 @Service("detailLiftService")
 public class DetailLiftServiceImpl implements DetailLiftService {
@@ -60,9 +60,8 @@ public class DetailLiftServiceImpl implements DetailLiftService {
      * @return 实例对象
      */
     @Override
-    public DetailLift update(DetailLift detailLift) {
-        this.detailLiftDao.update(detailLift);
-        return this.queryById(detailLift.getId());
+    public int update(DetailLift detailLift) {
+        return this.detailLiftDao.update(detailLift);
     }
 
     /**
@@ -94,6 +93,11 @@ public class DetailLiftServiceImpl implements DetailLiftService {
     @Override
     public List<DetailLift> queryLiftByProNum(String projectNum) {
         return detailLiftDao.queryLiftByProNum(projectNum);
+    }
+
+    @Override
+    public List<DetailLift> queryAll(DetailLift detailLift) {
+        return detailLiftDao.queryAll(detailLift);
     }
 
 }

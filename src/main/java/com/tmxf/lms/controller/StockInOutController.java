@@ -65,10 +65,21 @@ public class StockInOutController {
         return stockService.updateOutByTwo(stockInOut.getStockNum(), stockInOut.getSioCount());
     }
 
+    /**
+     * Find all in stock string.
+     *
+     * @return the string
+     */
     @GetMapping("findAllInStock")
     public String findAllInStock(){
         return JSONObject.toJSONString(stockInOutService.findAllInStock((short) 0));
     }
+
+    /**
+     * Find all out stock string.
+     *
+     * @return the string
+     */
     @GetMapping("findAllOutStock")
     public String findAllOutStock(){
         return JSONObject.toJSONString(stockInOutService.findAllInStock((short) 1));

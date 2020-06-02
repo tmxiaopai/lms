@@ -54,8 +54,9 @@ public interface StockInOutService {
 
     /**
      * 查询记录
-     * @param type
-     * @return
+     *
+     * @param type the type
+     * @return list
      */
     List<StockInOut> findAllInStock(short type);
 

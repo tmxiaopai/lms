@@ -25,6 +25,9 @@ import java.util.List;
  */
 @RestController
 public class HtMaintenanceController {
+    /**
+     * The Logger.
+     */
     Logger logger= LoggerFactory.getLogger(getClass());
     /**
      * 服务对象
@@ -72,6 +75,11 @@ public class HtMaintenanceController {
     @GetMapping("findAllMaHt")
     public String findAllMAHt() {
         return JSONObject.toJSONString(htMaintenanceService.findAllMaHt());
+    }
+
+    @PostMapping("searchHtMaByE")
+    public String searchHtMaByE(@RequestBody HtMaintenance htMaintenance){
+        return JSONObject.toJSONString(htMaintenanceService.queryAll(htMaintenance));
     }
 
 }

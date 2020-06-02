@@ -1,5 +1,7 @@
 package com.tmxf.lms.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.tmxf.lms.entity.Project;
 import com.tmxf.lms.entity.Visit;
 import com.tmxf.lms.service.ProjectService;
@@ -25,7 +27,7 @@ public class VisitPlanController {
     /**
      * The Logger.
      */
-    Logger logger= LoggerFactory.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
     private VisitService visitService;
     @Resource
@@ -39,8 +41,7 @@ public class VisitPlanController {
      * @return the object
      */
     @PostMapping("insertPlan")
-    public Object insertPlan(@RequestBody Visit visit, HttpServletRequest request)
-    {
+    public Object insertPlan(@RequestBody Visit visit, HttpServletRequest request) {
         visit.setSendMan((String) request.getSession().getAttribute("userName"));
         return visitService.insert(visit);
     }
@@ -52,9 +53,8 @@ public class VisitPlanController {
      * @return the int
      */
     @PostMapping("updatePlan")
-    public int updatePlan(@RequestBody Visit visit)
-    {
-        Project project=new Project();
+    public int updatePlan(@RequestBody Visit visit) {
+        Project project = new Project();
         project.setProjectNum(visit.getPNum());
         project.setProjectStatus(visit.getDegree());
         projectService.update(project);
@@ -68,7 +68,7 @@ public class VisitPlanController {
      * @return the int
      */
     @PostMapping("deletePlan")
-    public int deletePlan(@RequestBody Integer planId){
+    public int deletePlan(@RequestBody Integer planId) {
         return visitService.deleteById(planId);
     }
 
@@ -78,7 +78,14 @@ public class VisitPlanController {
      * @return the object
      */
     @PostMapping("findAllPlan")
-    public Object findAllPlan(){
-        return visitService.findAllPlan();
+    public String findAllPlan() {
+        return JSONObject.toJSONString(visitService.findAllPlan());
+    }
+
+    @PostMapping("searchVisitByProject")
+    public String searchVisitByProject(@RequestBody String projectNum) {
+        Visit visit = new Visit();
+        visit.setPNum(projectNum);
+        return JSONObject.toJSONString(visitService.queryAll(visit));
     }
 }

@@ -14,7 +14,7 @@ public interface HtSaleService {
      * 合同审核
      *
      * @param htSaleNum the ht sale num
-     * @return int
+     * @return int int
      */
     int checkSale(String htSaleNum);
 
@@ -65,5 +65,7 @@ public interface HtSaleService {
      * @return the list
      */
     List<HtSale> queryAllSale();
+
+    List<HtSale> queryAll(HtSale htSale);
 
 }

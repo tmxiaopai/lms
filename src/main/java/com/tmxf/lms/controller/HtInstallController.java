@@ -46,6 +46,7 @@ public class HtInstallController {
      * Insert install ht int.
      *
      * @param htInstall the ht install
+     * @param request   the request
      * @return the int
      */
     @PostMapping("insertInstallHt")
@@ -70,6 +71,11 @@ public class HtInstallController {
         detailSaleService.insert(d3);
 
         return htInstallService.insert(htInstall);
+    }
+
+    @PostMapping("queryHtInstallByE")
+    public String queryHtInstallByE(@RequestBody HtInstall htInstall){
+        return JSONObject.toJSONString(htInstallService.queryAll(htInstall));
     }
 
     /**

@@ -106,4 +106,9 @@ public class HtSaleController {
     public int updateSalse(@RequestBody HtSale htSale) {
         return htSaleService.update(htSale);
     }
+
+    @PostMapping("searchHtSaleByE")
+    public String searchHtSaleByE(@RequestBody HtSale htSale){
+        return JSONObject.toJSONString(htSaleService.queryAll(htSale));
+    }
 }

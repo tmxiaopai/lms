@@ -55,7 +55,7 @@ public interface StockService {
     /**
      * 查询库存
      *
-     * @return list
+     * @return list list
      */
     List<Stock> findAllStock();
 
@@ -86,8 +86,9 @@ public interface StockService {
 
     /**
      * 查库存
-     * @param num
-     * @return
+     *
+     * @param num the num
+     * @return int
      */
     int queryCountByNum(String num);
 

@@ -17,7 +17,7 @@ public interface HtSaleMapper {
      * 审核
      *
      * @param htSaleNum the ht sale num
-     * @return int
+     * @return int int
      */
     @Update({
             "update ht_sale set ht_sale_state = true where ht_sale_num=#{hrSaleNum,jdbcType=VARCHAR}"

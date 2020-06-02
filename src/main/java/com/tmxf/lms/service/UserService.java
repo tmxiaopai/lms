@@ -15,7 +15,7 @@ public interface UserService {
     /**
      * 查询所有用户信息
      *
-     * @return list
+     * @return list list
      */
     List<User> findAll();
 
@@ -23,7 +23,7 @@ public interface UserService {
      * 根据用户编号查询用户信息
      *
      * @param userNum the user num
-     * @return user
+     * @return user user
      */
     User findUserLoginInfoByUserNum(Integer userNum);
 
@@ -31,7 +31,7 @@ public interface UserService {
      * 新建用户
      *
      * @param user the user
-     * @return int
+     * @return int int
      */
     int insertUser(User user);
 
@@ -39,7 +39,7 @@ public interface UserService {
      * 更新用户信息
      *
      * @param user the user
-     * @return int
+     * @return int int
      */
     int updateUserBuPrimaryKey(User user);
 
@@ -47,7 +47,7 @@ public interface UserService {
      * 删除用户
      *
      * @param userId the user id
-     * @return int
+     * @return int int
      */
     int deleteUser(Integer userId);
 
@@ -56,7 +56,7 @@ public interface UserService {
      *
      * @param password the password
      * @param userNum  the user num
-     * @return string
+     * @return string string
      */
     String encodingPassword(String password, Integer userNum);
 
@@ -68,6 +68,23 @@ public interface UserService {
      */
     int updateLoginTime(Integer userNum);
 
+    /**
+     * Query by user list.
+     *
+     * @param user the user
+     * @return the list
+     */
     List<User> queryByUser(User user);
 
+    /**
+     * 找密码
+     *
+     * @param userNum
+     * @return
+     */
+    String findPasswordByUserNum(Integer userNum);
+
+    User findMyInfo(Integer userNum);
+
+    void updatePassword(String password, Integer userNum);
 }

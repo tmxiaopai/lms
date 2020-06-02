@@ -8,7 +8,7 @@ import java.util.List;
  * 报价书(Quotation)表数据库访问层
  *
  * @author makejava
- * @since 2020-04-24 16:06:52
+ * @since 2020-05-25 03:32:52
  */
 public interface QuotationMapper {
 
@@ -29,7 +29,7 @@ public interface QuotationMapper {
      */
     List<Quotation> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
-    List<Quotation> queryByProNum(String projectNum);
+
     /**
      * 通过实体作为筛选条件查询
      *

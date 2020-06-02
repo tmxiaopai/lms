@@ -18,14 +18,14 @@ public interface PermissionService {
      *
      * @param userNum the user num
      * @param pType   the p type
-     * @return list
+     * @return list list
      */
     List<Permission> findNavTree(Integer userNum, Integer pType);
 
     /**
      * 查找全部权限信息
      *
-     * @return list
+     * @return list list
      */
     List<Permission> findAllPermission();
 

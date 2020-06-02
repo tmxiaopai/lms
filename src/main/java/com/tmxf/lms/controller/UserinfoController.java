@@ -12,7 +12,7 @@ import java.util.List;
  * (Userinfo)表控制层
  *
  * @author makejava
- * @since 2020-04-22 14:56:02
+ * @since 2020 -04-22 14:56:02
  */
 @RestController
 public class UserinfoController {
@@ -22,12 +22,25 @@ public class UserinfoController {
     @Resource
     private UserinfoService userinfoService;
 
-    //int deleteById(Integer userNum){}
+    /**
+     * Insert int.
+     *
+     * @param userinfo the userinfo
+     * @return the int
+     */
+//int deleteById(Integer userNum){}
     //int update(Userinfo userinfo){}
     @PostMapping("insertUserInfo")
     int insert(@RequestBody  Userinfo userinfo){
         return userinfoService.insert(userinfo);
     }
+
+    /**
+     * Query all list.
+     *
+     * @param userinfo the userinfo
+     * @return the list
+     */
     @GetMapping("findAllUserInfo")
     List<Userinfo> queryAll(Userinfo userinfo){
 return userinfoService.queryAll(null);

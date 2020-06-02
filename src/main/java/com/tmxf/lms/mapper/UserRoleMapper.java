@@ -9,6 +9,7 @@ import org.apache.ibatis.type.JdbcType;
 
 /**
  * The interface User role mapper.
+ * @author TMXIAOPAI
  */
 @Mapper
 public interface UserRoleMapper {
@@ -16,7 +17,7 @@ public interface UserRoleMapper {
      * Delete by primary key int.
      *
      * @param userRoleId the user role id
-     * @return int
+     * @return int int
      */
     @Delete({
             "delete from user_role",
@@ -28,7 +29,7 @@ public interface UserRoleMapper {
      * Insert int.
      *
      * @param record the record
-     * @return int
+     * @return int int
      */
     @Insert({
             "insert into user_role ( user_id, ",
@@ -60,7 +61,7 @@ public interface UserRoleMapper {
     /**
      * Select all list.
      *
-     * @return list
+     * @return list list
      */
     @Select({
             "select",
@@ -78,7 +79,7 @@ public interface UserRoleMapper {
      * Update by primary key int.
      *
      * @param record the record
-     * @return int
+     * @return int int
      */
     @Update({
             "update user_role",
@@ -92,7 +93,7 @@ public interface UserRoleMapper {
      * Update by user id int.
      *
      * @param userRole the user role
-     * @return int
+     * @return int int
      */
     @Update({
             "update user_role",

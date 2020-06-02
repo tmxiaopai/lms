@@ -85,4 +85,9 @@ public class HtSaleServiceImpl implements HtSaleService {
     public List<HtSale> queryAllSale() {
         return htSaleMapper.queryAll(null);
     }
+
+    @Override
+    public List<HtSale> queryAll(HtSale htSale) {
+        return htSaleMapper.queryAll(htSale);
+    }
 }

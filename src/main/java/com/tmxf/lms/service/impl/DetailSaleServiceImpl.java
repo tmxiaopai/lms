@@ -10,8 +10,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Detail sale service.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/21 - 17:11
+ * @date 2020 /4/21 - 17:11
  * @package_name com.tmxf.lms.service.impl
  */
 @Service

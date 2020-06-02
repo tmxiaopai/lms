@@ -71,14 +71,14 @@ public interface ProjectService {
      * 查询名字是否重复
      *
      * @param projectName the project name
-     * @return int
+     * @return int int
      */
     int projectNameOk(String projectName);
 
     /**
      * 查找项目名
      *
-     * @return list
+     * @return list list
      */
     List<Project> findAllProjectName();
 }

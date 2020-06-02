@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 
 /**
  * The interface User mapper.
@@ -17,6 +19,16 @@ import org.springframework.context.annotation.Bean;
 @Mapper
 public interface UserMapper {
     /**
+     * 修改密码
+     * @param password
+     * @param userNum
+     * @return
+     */
+    @Select({
+            "update user set user_password = #{password} where user_num = #{userNum}"
+    })
+    void updatePassword(String password,Integer userNum);
+    /**
      * 查找用户登陆信息
      *
      * @param userNum the user num
@@ -24,6 +36,26 @@ public interface UserMapper {
      */
     @Select({"select user_num,user_name,user_password from user where user_num = #{userNum}"})
     User findByUserNum(Integer userNum);
+
+    /**
+     * 查找密码
+     * @param userNum
+     * @return
+     */
+    @Select({
+            "select user_password from user where user_num = #{userNum}"
+    })
+    String findPasswordByUserNum(Integer userNum);
+
+    /**
+     * 查询用户四项信息
+     * @param userNum
+     * @return
+     */
+    @Select({
+            "select user_num,user_name,user_phone,user_email from user where user_num = #{userNum}"
+    })
+    User findMyInfo(Integer userNum);
 
     /**
      * 查找所有用户
@@ -39,7 +71,7 @@ public interface UserMapper {
      * 更新user信息
      *
      * @param user the user
-     * @return int
+     * @return int int
      */
     @Update({
             "update user set user_password=#{userPassword,jdbcType=VARCHAR},user_name=#{userName,jdbcType=VARCHAR},",

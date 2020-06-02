@@ -42,7 +42,7 @@ public interface WorkOrderService {
      * @param workOrder 实例对象
      * @return 实例对象 work order
      */
-    WorkOrder update(WorkOrder workOrder);
+    int update(WorkOrder workOrder);
 
     /**
      * 通过主键删除数据
@@ -55,7 +55,7 @@ public interface WorkOrderService {
     /**
      * 查找所有工单
      *
-     * @return list
+     * @return list list
      */
     List<WorkOrder> queryAll();
 
@@ -63,8 +63,9 @@ public interface WorkOrderService {
      * 更新状态
      *
      * @param faultId the fault id
-     * @return int
+     * @return int int
      */
     int updateConfirm(Integer faultId);
 
+    List<WorkOrder> queryByE(WorkOrder workOrder);
 }

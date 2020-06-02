@@ -61,9 +61,9 @@ public class WorkOrderServiceImpl implements WorkOrderService {
      * @return 实例对象
      */
     @Override
-    public WorkOrder update(WorkOrder workOrder) {
-        this.workOrderMapper.update(workOrder);
-        return this.queryById(workOrder.getFaultId());
+    public int update(WorkOrder workOrder) {
+
+        return this.workOrderMapper.update(workOrder);
     }
 
     /**
@@ -85,5 +85,10 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     @Override
     public int updateConfirm(Integer faultId) {
         return workOrderMapper.updateConfirm(faultId);
+    }
+
+    @Override
+    public List<WorkOrder> queryByE(WorkOrder workOrder) {
+        return workOrderMapper.queryAll(workOrder);
     }
 }

@@ -58,5 +58,6 @@ public interface HtMaintenanceService {
      * @return the list
      */
     List<HtMaintenance> findAllMaHt();
+    List<HtMaintenance> queryAll(HtMaintenance htMaintenance);
 
 }

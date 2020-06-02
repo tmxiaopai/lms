@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmxf.lms.mapper.DetailLiftMapper">
+
+    <resultMap type="com.tmxf.lms.entity.DetailLift" id="DetailLiftMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="cz" column="cz" jdbcType="VARCHAR"/>
+        <result property="speed" column="speed" jdbcType="OTHER"/>
+        <result property="deadWeight" column="dead_weight" jdbcType="INTEGER"/>
+        <result property="unitPrice" column="unit_price" jdbcType="DECIMAL"/>
+        <result property="factoryNum" column="factory_num" jdbcType="VARCHAR"/>
+        <result property="installUnitPrice" column="install_unit_price" jdbcType="OTHER"/>
+        <result property="liftInstall" column="lift_install" jdbcType="DECIMAL"/>
+        <result property="liftTs" column="lift_ts" jdbcType="DECIMAL"/>
+        <result property="total" column="total" jdbcType="DECIMAL"/>
+        <result property="deviceCount" column="device_count" jdbcType="INTEGER"/>
+        <result property="subTotal" column="sub_total" jdbcType="DECIMAL"/>
+        <result property="liftDescription" column="lift_description" jdbcType="VARCHAR"/>
+        <result property="installStatus" column="install_status" jdbcType="VARCHAR"/>
+        <result property="checkYearDate" column="check_year_date" jdbcType="TIMESTAMP"/>
+        <result property="projectNum" column="project_num" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryLiftByProNum" resultMap="DetailLiftMap">
+        select
+            id, type, cz, speed, dead_weight, unit_price, factory_num, install_unit_price, lift_install, lift_ts, total, device_count, sub_total, lift_description, install_status, check_year_date, project_num
+        from db_lms.detail_lift
+        where project_num=#{projectNum}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DetailLiftMap">
+        select
+          id, type, cz, speed, dead_weight, unit_price, factory_num, install_unit_price, lift_install, lift_ts, total, device_count, sub_total, lift_description, install_status, check_year_date, project_num
+        from db_lms.detail_lift
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DetailLiftMap">
+        select
+          id, type, cz, speed, dead_weight, unit_price, factory_num, install_unit_price, lift_install, lift_ts, total, device_count, sub_total, lift_description, install_status, check_year_date, project_num
+        from db_lms.detail_lift
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="queryUnFinish" resultMap="DetailLiftMap">
+        select
+            id, type, cz, speed, dead_weight, unit_price, factory_num, install_unit_price, lift_install, lift_ts, total, device_count, sub_total, lift_description, install_status, check_year_date, project_num
+        from db_lms.detail_lift
+        where install_status != '已安装'
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DetailLiftMap">
+        select
+          id, type, cz, speed, dead_weight, unit_price, factory_num, install_unit_price, lift_install, lift_ts, total, device_count, sub_total, lift_description, install_status, check_year_date, project_num
+        from db_lms.detail_lift
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="cz != null">
+                and cz = #{cz}
+            </if>
+            <if test="speed != null">
+                and speed = #{speed}
+            </if>
+            <if test="deadWeight != null">
+                and dead_weight = #{deadWeight}
+            </if>
+            <if test="unitPrice != null">
+                and unit_price = #{unitPrice}
+            </if>
+            <if test="factoryNum != null and factoryNum != ''">
+                and factory_num = #{factoryNum}
+            </if>
+            <if test="installUnitPrice != null">
+                and install_unit_price = #{installUnitPrice}
+            </if>
+            <if test="liftInstall != null">
+                and lift_install = #{liftInstall}
+            </if>
+            <if test="liftTs != null">
+                and lift_ts = #{liftTs}
+            </if>
+            <if test="total != null">
+                and total = #{total}
+            </if>
+            <if test="deviceCount != null">
+                and device_count = #{deviceCount}
+            </if>
+            <if test="subTotal != null">
+                and sub_total = #{subTotal}
+            </if>
+            <if test="liftDescription != null and liftDescription != ''">
+                and lift_description = #{liftDescription}
+            </if>
+            <if test="installStatus != null">
+                and install_status = #{installStatus}
+            </if>
+            <if test="checkYearDate != null">
+                and check_year_date = #{checkYearDate}
+            </if>
+            <if test="projectNum != null and projectNum != ''">
+                and project_num = #{projectNum}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into db_lms.detail_lift(type, cz, speed, dead_weight, unit_price, factory_num, install_unit_price, lift_install, lift_ts, total, device_count, sub_total, lift_description, install_status, check_year_date, project_num)
+        values (#{type}, #{cz}, #{speed}, #{deadWeight}, #{unitPrice}, #{factoryNum}, #{installUnitPrice}, #{liftInstall}, #{liftTs}, #{total}, #{deviceCount}, #{subTotal}, #{liftDescription}, #{installStatus}, #{checkYearDate}, #{projectNum})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update db_lms.detail_lift
+        <set>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="cz != null">
+                cz = #{cz},
+            </if>
+            <if test="speed != null">
+                speed = #{speed},
+            </if>
+            <if test="deadWeight != null">
+                dead_weight = #{deadWeight},
+            </if>
+            <if test="unitPrice != null">
+                unit_price = #{unitPrice},
+            </if>
+            <if test="factoryNum != null and factoryNum != ''">
+                factory_num = #{factoryNum},
+            </if>
+            <if test="installUnitPrice != null">
+                install_unit_price = #{installUnitPrice},
+            </if>
+            <if test="liftInstall != null">
+                lift_install = #{liftInstall},
+            </if>
+            <if test="liftTs != null">
+                lift_ts = #{liftTs},
+            </if>
+            <if test="total != null">
+                total = #{total},
+            </if>
+            <if test="deviceCount != null">
+                device_count = #{deviceCount},
+            </if>
+            <if test="subTotal != null">
+                sub_total = #{subTotal},
+            </if>
+            <if test="liftDescription != null and liftDescription != ''">
+                lift_description = #{liftDescription},
+            </if>
+            <if test="installStatus != null">
+                install_status = #{installStatus},
+            </if>
+            <if test="checkYearDate != null">
+                check_year_date = #{checkYearDate},
+            </if>
+            <if test="projectNum != null and projectNum != ''">
+                project_num = #{projectNum},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from db_lms.detail_lift where id = #{id}
+    </delete>
+
+</mapper>

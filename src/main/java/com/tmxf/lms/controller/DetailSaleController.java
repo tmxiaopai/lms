@@ -15,8 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The type Detail sale controller.
+ *
  * @author TMXIAOPAI
- * @date 2020/4/21 - 17:16
+ * @date 2020 /4/21 - 17:16
  * @package_name com.tmxf.lms.controller
  */
 @RestController
@@ -24,23 +26,54 @@ public class DetailSaleController {
     @Resource
     private DetailSaleService detailSaleService;
 
+    /**
+     * Find all un string.
+     *
+     * @return the string
+     */
     @GetMapping("findAllUnReceive")
     public String findAllUn(){
         return JSONObject.toJSONString(detailSaleService.findAllUn());
     }
+
+    /**
+     * Find all in string.
+     *
+     * @return the string
+     */
     @GetMapping("findAllOkMoney")
     public String findAllIn(){
         return JSONObject.toJSONString(detailSaleService.findAllIn());
     }
+
+    /**
+     * Receive money int.
+     *
+     * @param num the num
+     * @return the int
+     */
     @PostMapping("receiveMoney")
     public int receiveMoney(@RequestBody String num){
         return detailSaleService.okMoney(num);
     }
 
+    /**
+     * Invoice int.
+     *
+     * @param num the num
+     * @return the int
+     */
     @PostMapping("invoice")
     public int invoice(@RequestBody String num){
         return detailSaleService.invoice(num);
     }
+
+    /**
+     * Insert rm int.
+     *
+     * @param ds the ds
+     * @return the int
+     */
     @PostMapping("insertRM")
     public int insertRm(@RequestBody DetailSale ds){
         Date d = new Date();
@@ -50,6 +83,12 @@ public class DetailSaleController {
         return detailSaleService.insert(ds);
     }
 
+    /**
+     * Search sale of project string.
+     *
+     * @param pnum the pnum
+     * @return the string
+     */
     @PostMapping("searchSaleOfProject")
     public String searchSaleOfProject(@RequestBody String pnum){
         Map<String,Object> maps=new HashMap<>();

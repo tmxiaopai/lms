@@ -81,4 +81,9 @@ public class VisitServiceImpl implements VisitService {
     public List<Visit> findAllPlan() {
         return visitDao.queryAll(null);
     }
+
+    @Override
+    public List<Visit> queryAll(Visit visit) {
+        return visitDao.queryAll(visit);
+    }
 }

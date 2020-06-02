@@ -17,7 +17,7 @@ public class ReflectionUtils {
      * @param object 要调用方法的对象
      * @param method 要调用的方法名
      * @param args   参数对象数组
-     * @return object
+     * @return object object
      */
     public static Object invoke(Object object, String method, Object... args) {
         Object result = null;
@@ -49,7 +49,7 @@ public class ReflectionUtils {
      * @param clazz the clazz
      * @param name  the name
      * @param args  参数实例数据
-     * @return method
+     * @return method method
      */
     public static Method getMethod(Class<? extends Object> clazz, String name, Object[] args) {
         Method queryMethod = null;

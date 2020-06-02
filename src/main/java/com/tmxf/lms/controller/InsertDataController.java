@@ -9,12 +9,13 @@ import com.tmxf.lms.service.NoticeService;
 import com.tmxf.lms.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -39,6 +40,27 @@ public class InsertDataController {
     @Resource
     private AboutRoleService aboutRoleService;
 
+@RequestMapping("/upload")
+public String upload(@RequestParam("file")MultipartFile file){
+    try{
+        if(file.isEmpty()){
+            return "文件为空";
+        }
+        String fileName=file.getOriginalFilename();
+        String suffixName=fileName.substring(fileName.lastIndexOf("."));
+        String filePath="G:\\";
+        String path=filePath+fileName;
+        File dest=new File(path);
+        if(!dest.getParentFile().exists()){
+            dest.getParentFile().mkdirs();
+        }
+        file.transferTo(dest);
+        return "成功";
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return "失败";
+}
 
     /**
      * Insert notice object.

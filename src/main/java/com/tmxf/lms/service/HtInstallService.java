@@ -58,5 +58,6 @@ public interface HtInstallService {
      * @return the list
      */
     List<HtInstall> findAllInstallHt();
+    List<HtInstall> queryAll(HtInstall htInstall);
 
 }

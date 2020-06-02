@@ -66,8 +66,9 @@ public interface StockInOutMapper {
 
     /**
      * 查询记录
-     * @param type
-     * @return
+     *
+     * @param type the type
+     * @return list
      */
     @Select({
             "select * from stock_in_out where sio_type = #{type} order by sio_date desc"

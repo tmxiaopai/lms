@@ -12,7 +12,7 @@ import java.util.List;
  * (Recordma)表服务实现类
  *
  * @author makejava
- * @since 2020-04-23 21:45:08
+ * @since 2020 -04-23 21:45:08
  */
 @Service("recordmaService")
 public class RecordmaServiceImpl implements RecordmaService {
@@ -21,7 +21,7 @@ public class RecordmaServiceImpl implements RecordmaService {
 
     @Override
     public List<Recordma> queryAll(Recordma recordma) {
-        return recordmaDao.queryAll(null);
+        return recordmaDao.queryAll(recordma);
     }
 
     @Override

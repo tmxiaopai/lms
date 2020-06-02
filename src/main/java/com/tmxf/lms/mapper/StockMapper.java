@@ -61,7 +61,7 @@ public interface StockMapper {
      *
      * @param num   the num
      * @param count the count
-     * @return int
+     * @return int object
      */
     @Select({
             "update stock set s_in = s_in + #{count} where s_num=#{num}"
@@ -73,7 +73,7 @@ public interface StockMapper {
      *
      * @param num   the num
      * @param count the count
-     * @return int
+     * @return int object
      */
     @Select({
             "update stock set s_in = s_in - #{count},s_out = s_out + #{count} where s_num=#{num}"
@@ -91,7 +91,7 @@ public interface StockMapper {
     /**
      * 查询主要信息
      *
-     * @return list
+     * @return list list
      */
     @Select({
             "select s_name,s_num from stock"
@@ -100,8 +100,9 @@ public interface StockMapper {
 
     /**
      * 查库存
-     * @param num
-     * @return
+     *
+     * @param num the num
+     * @return int
      */
     @Select({
             "select s_in from stock where s_num = #{num}"

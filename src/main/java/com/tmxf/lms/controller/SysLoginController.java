@@ -120,4 +120,13 @@ public class SysLoginController {
         map.put("msg", "登录成功");
         return map;
     }
+
+    /**
+     * 退出
+     */
+    @RequestMapping("/logout")
+    public void logout(){
+        Subject subject=SecurityUtils.getSubject();
+        subject.logout();
+    }
 }

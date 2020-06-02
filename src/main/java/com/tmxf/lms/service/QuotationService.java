@@ -1,5 +1,6 @@
 package com.tmxf.lms.service;
 
+import com.sun.org.apache.xpath.internal.operations.Quo;
 import com.tmxf.lms.entity.Quotation;
 import java.util.List;
 
@@ -7,12 +8,9 @@ import java.util.List;
  * 报价书(Quotation)表服务接口
  *
  * @author makejava
- * @since 2020-04-24 16:06:52
+ * @since 2020-05-25 03:32:52
  */
 public interface QuotationService {
-
-    List<Quotation> queryByProNum(String projectNum);
-    List<Quotation> queryAll(Quotation quotation);
 
     /**
      * 通过ID查询单条数据
@@ -54,5 +52,7 @@ public interface QuotationService {
      * @return 是否成功
      */
     boolean deleteById(String qNum);
+
+    List<Quotation> queryAll(Quotation quotation);
 
 }

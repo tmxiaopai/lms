@@ -16,7 +16,7 @@ public class PasswordUtils {
      * @param salt    盐
      * @param rawPass 明文
      * @param encPass 密文
-     * @return boolean
+     * @return boolean boolean
      */
     public static boolean matches(String salt, String rawPass, String encPass) {
         return new PasswordEncoder(salt).matches(encPass, rawPass);
@@ -27,7 +27,7 @@ public class PasswordUtils {
      *
      * @param rawPass 明文
      * @param salt    the salt
-     * @return string
+     * @return string string
      */
     public static String encode(String rawPass, String salt) {
         return new PasswordEncoder(salt).encode(rawPass);
@@ -36,7 +36,7 @@ public class PasswordUtils {
     /**
      * 获取加密盐
      *
-     * @return salt
+     * @return salt salt
      */
     public static String getSalt() {
         return UUID.randomUUID().toString().replaceAll("-", "").substring(0, 20);

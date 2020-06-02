@@ -43,7 +43,7 @@ public interface ProjectMapper {
      * 按需查找
      *
      * @param project the project
-     * @return list
+     * @return list list
      */
     List<Project> queryAllByProject(Project project);
 
@@ -85,7 +85,7 @@ public interface ProjectMapper {
     /**
      * 查找项目名
      *
-     * @return list
+     * @return list list
      */
     @Select({
             "select project_num,project_name from project order by project_name desc"

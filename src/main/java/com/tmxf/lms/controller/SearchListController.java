@@ -68,10 +68,22 @@ public class SearchListController {
         return noticeService.findAllNotice();
     }
 
+    @PostMapping("searchNoticeByContent")
+    public String searchNoticeByContent(@RequestBody String content){
+        logger.info("传入的查询信息为"+content);
+        return JSONObject.toJSONString(noticeService.findNoticeByContent(content));
+    }
+
+    /**
+     * Find welcome notoce string.
+     *
+     * @return the string
+     */
     @GetMapping("findWelcomeNotice")
-    public String findWelcomeNotoce(){
+    public String findWelcomeNotice(){
         return JSONObject.toJSONString(noticeService.findWNotice());
     }
+
     /**
      * Find all role object.
      *
@@ -83,8 +95,19 @@ public class SearchListController {
         return aboutRoleService.findAllRole();
     }
 
+    /**
+     * Search user string.
+     *
+     * @param user the user
+     * @return the string
+     */
     @PostMapping("searchUser")
     public String searchUser(@RequestBody User user){
         return JSONObject.toJSONString( userService.queryByUser(user));
+    }
+
+    @PostMapping("findMyInfo")
+    public String findMyInfo(@RequestBody Integer userNum){
+        return JSONObject.toJSONString(userService.findMyInfo(userNum));
     }
 }

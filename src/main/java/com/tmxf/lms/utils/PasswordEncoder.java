@@ -43,7 +43,7 @@ public class PasswordEncoder {
      * 密码加密
      *
      * @param rawPass the raw pass
-     * @return string
+     * @return string string
      */
     public String encode(String rawPass) {
         String result = null;
@@ -61,7 +61,7 @@ public class PasswordEncoder {
      *
      * @param encPass 密文
      * @param rawPass 明文
-     * @return boolean
+     * @return boolean boolean
      */
     public boolean matches(String encPass, String rawPass) {
         String pass1 = "" + encPass;

@@ -12,22 +12,12 @@ import java.util.List;
  * 报价书(Quotation)表服务实现类
  *
  * @author makejava
- * @since 2020-04-24 16:06:52
+ * @since 2020-05-25 03:32:57
  */
 @Service("quotationService")
 public class QuotationServiceImpl implements QuotationService {
     @Resource
     private QuotationMapper quotationDao;
-
-    @Override
-    public List<Quotation> queryByProNum(String projectNum) {
-        return quotationDao.queryByProNum(projectNum);
-    }
-
-    @Override
-    public List<Quotation> queryAll(Quotation quotation) {
-        return quotationDao.queryAll(quotation);
-    }
 
     /**
      * 通过ID查询单条数据
@@ -60,6 +50,7 @@ public class QuotationServiceImpl implements QuotationService {
      */
     @Override
     public int insert(Quotation quotation) {
+
         return this.quotationDao.insert(quotation);
     }
 
@@ -84,5 +75,10 @@ public class QuotationServiceImpl implements QuotationService {
     @Override
     public boolean deleteById(String qNum) {
         return this.quotationDao.deleteById(qNum) > 0;
+    }
+
+    @Override
+    public List<Quotation> queryAll(Quotation quotation) {
+        return quotationDao.queryAll(quotation);
     }
 }

@@ -4,7 +4,7 @@
 
     <resultMap type="com.tmxf.lms.entity.Quotation" id="QuotationMap">
         <result property="qNum" column="q_num" jdbcType="VARCHAR"/>
-        <result property="qPrice" column="q_price" jdbcType="OTHER"/>
+        <result property="qPrice" column="q_price" jdbcType="NUMERIC"/>
         <result property="qDate" column="q_date" jdbcType="TIMESTAMP"/>
         <result property="qStart" column="q_start" jdbcType="TIMESTAMP"/>
         <result property="qEnd" column="q_end" jdbcType="TIMESTAMP"/>
@@ -15,28 +15,16 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="QuotationMap">
-        select q_num,
-               q_price,
-               q_date,
-               q_start,
-               q_end,
-               q_install_date,
-               q_project,
-               q_description
+        select
+          q_num, q_price, q_date, q_start, q_end, q_install_date, q_project, q_description
         from db_lms.quotation
         where q_num = #{qNum}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="QuotationMap">
-        select q_num,
-               q_price,
-               q_date,
-               q_start,
-               q_end,
-               q_install_date,
-               q_project,
-               q_description
+        select
+          q_num, q_price, q_date, q_start, q_end, q_install_date, q_project, q_description
         from db_lms.quotation
         limit #{offset}, #{limit}
     </select>
@@ -74,22 +62,9 @@
         </where>
     </select>
 
-    <select id="queryByProNum">
-        select q_num,
-               q_price,
-               q_date,
-               q_start,
-               q_end,
-               q_install_date,
-               q_project,
-               q_description
-        from db_lms.quotation
-        where q_project = #{projectNum}
-    </select>
-
     <!--新增所有列-->
     <insert id="insert">
-        insert into db_lms.quotation(q_num, q_price, q_date, q_start, q_end, q_install_date, q_project, q_description)
+        insert into db_lms.quotation(q_num,q_price, q_date, q_start, q_end, q_install_date, q_project, q_description)
         values (#{qNum},#{qPrice}, #{qDate}, #{qStart}, #{qEnd}, #{qInstallDate}, #{qProject}, #{qDescription})
     </insert>
 
@@ -124,9 +99,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete
-        from db_lms.quotation
-        where q_num = #{qNum}
+        delete from db_lms.quotation where q_num = #{qNum}
     </delete>
 
 </mapper>
